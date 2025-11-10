@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="vts">
+    <meta name="description" content="Educational example demonstrating the use of the meta viewport tag in HTML.">
+    <meta name="keywords" content="HTML, viewport, responsive design, vts">
+    <!--
+      META VIEWPORT TAG
+      -----------------
+      The <meta name="viewport"> tag controls how a webpage is displayed and scaled on different devices.
+
+      Before smartphones and tablets, web pages were designed for large desktop screens
+      and often had fixed widths. When viewed on smaller screens, they appeared zoomed out and tiny.
+
+      The viewport meta tag tells the browser how to control the page's dimensions and scaling
+      so that the layout fits properly on all devices.
+
+      Common properties:
+
+        width=device-width
+          → sets the viewport width equal to the physical device’s width (in CSS pixels).
+
+        initial-scale=1
+          → defines the default zoom level when the page is first loaded (1 means no zoom).
+
+        user-scalable=yes
+          → allows users to zoom in and out (for accessibility). “no” disables zooming,
+            which violates Web Content Accessibility Guidelines (WCAG).
+
+        height=device-height
+          → rarely used; browsers calculate height automatically.
+
+        minimum-scale / maximum-scale
+          → control the minimum and maximum zoom levels (values between 0.1 and 10).
+          → limiting zoom (especially setting maximum-scale=1 or user-scalable=no)
+            is discouraged for accessibility reasons.
+
+      Best practice:
+      --------------
+      Always use:  <meta name="viewport" content="width=device-width, initial-scale=1">
+      and let responsive CSS handle layout changes for different screen sizes.
+
+      Reference:
+      https://developer.mozilla.org/en-US/docs/Web/HTML/Viewport_meta_tag
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    <title>Test 2 – Meta Viewport Example</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .test {
+            background-color: #f00;
+            color: #fff;
+            padding: 5px;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+<div class="test">
+    hello world! (width=device-width, initial-scale=1.0, user-scalable=yes)
+</div>
+
+</body>
+</html>

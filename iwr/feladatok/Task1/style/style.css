@@ -1,0 +1,17 @@
+span {
+    padding: 2px 4px;
+}
+.phone {
+    background: #0f0;
+}
+.tablet {
+    background: #fffacd;
+}
+
+.computer {
+    background: #0ff;
+}
+
+tr:hover, span:hover{
+    background: #f5f5f5;
+}

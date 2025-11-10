@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap 1</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+    <style>
+        .container, .container-fluid {
+
+        }
+
+        .bg-vts {
+            background-color: #f00;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<!--
+
+The .container class provides a responsive fixed width container
+The .container-fluid class provides a full width container,
+spanning the entire width of the viewport
+
+Breakpoint 	        Class infix 	Dimensions      Max width
+X-Small 	        None 	        <576px          100%
+Small 	            sm 	            ≥576px          540px
+Medium 	            md 	            ≥768px          728px
+Large 	            lg 	            ≥992px          960px
+Extra large 	    xl 	            ≥1200px         1140px
+Extra extra large   xxl 	        ≥1400px         1320px
+
+
+Important! Change container class to container-fluid and see what is the difference.
+
+-->
+
+<div class="container bg-vts">
+    <h1>Test title</h1>
+    <p>This is some text.</p>
+</div>
+
+<div class="container">
+    <h1>Test title</h1>
+    <p>This is some text.</p>
+</div>
+
+<div class="container">
+    <h1>Test title</h1>
+    <p>This is some text.</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+</body>
+</html>

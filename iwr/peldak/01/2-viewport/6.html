@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="vts">
+    <meta name="keywords" content="HTML, viewport, media query, orientation, responsive design, vts">
+    <!--
+      META VIEWPORT TAG
+      -----------------
+      This line controls how the page fits and scales on different devices.
+
+        width=device-width
+          → makes the page width match the physical screen width of the device.
+
+        minimum-scale=0.5
+          → allows the user to zoom out to 50% of the normal size.
+            (The page can appear smaller if the user pinches to zoom out.)
+
+        user-scalable=yes
+          → allows zooming in and out, which is important for accessibility.
+
+      Note:
+      No "initial-scale" is defined, so the browser assumes the default (usually 1.0).
+    -->
+    <meta name="viewport" content="width=device-width, minimum-scale=0.5, user-scalable=yes">
+    <title>Test 6 – Orientation and Media Query Example</title>
+
+    <style>
+        body {
+            background-color: lightgreen;
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            font-size: 1.2em;
+            padding: 16px;
+        }
+
+        /*
+          MEDIA QUERY – orientation: landscape
+          ------------------------------------
+          This rule is applied when the device is in landscape orientation
+          (the width is greater than the height).
+
+          "only" is optional — it was used to hide media queries from very old browsers.
+          Modern browsers understand @media screen, so "only" is not required anymore.
+
+          https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries?utm_source=chatgpt.com
+        */
+        @media only screen and (orientation: landscape) {
+            body {
+                background-color: lightblue;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<p>
+    Resize the browser window or rotate your device.
+    When the width of this document is larger than its height,
+    the background color changes to <strong>lightblue</strong>.
+    Otherwise, it remains <strong>lightgreen</strong>.
+</p>
+
+<p>
+    Orientation detected: <em>portrait</em> or <em>landscape</em> (based on current screen aspect ratio).
+</p>
+</body>
+</html>

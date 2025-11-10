@@ -1,0 +1,14 @@
+{
+    "name": "myproject/mobile-detect-example",
+    "description": "Simple PHP example that uses the Mobile Detect library.",
+    "type": "project",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "VTŠ"
+        }
+    ],
+    "require": {
+        "mobiledetect/mobiledetectlib": "^4.8"
+    }
+}

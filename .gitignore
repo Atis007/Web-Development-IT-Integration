@@ -1,0 +1,25 @@
+# PHP
+vendor/
+
+# IDE
+.idea/
+
+# secrets & config
+*.env
+*.env.*
+config.php
+*config*.php
+*.ini
+*.inc
+
+# database files
+*.sql
+*.db
+*.sqlite
+*.sqlite3
+
+# documents
+*.pdf
+*.doc
+*.docx
+*.txt

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="vts">
+    <meta name="description" content="Educational example demonstrating custom viewport width and window dimensions.">
+    <meta name="keywords" content="HTML, viewport, responsive, JavaScript, vts">
+    <!--
+      META VIEWPORT TAG
+      -----------------
+      The <meta name="viewport"> tag defines how the page is displayed on different devices.
+
+      This example intentionally sets:
+        width=200           → attempts to set the viewport width to 200 CSS pixels.
+                              Most modern browsers will ignore this value if it's too small
+                              and will instead use device-width automatically.
+        initial-scale=1     → sets normal zoom level on load.
+        maximum-scale=1     → disables zooming in (not recommended; hurts accessibility).
+        user-scalable=yes   → allows user zooming (but maximum-scale=1 still prevents it effectively).
+
+      On modern mobile devices, these constraints are often overridden to maintain usability.
+    -->
+    <meta name="viewport" content="width=200, initial-scale=1, maximum-scale=1, user-scalable=yes">
+
+    <title>Test 3 – Custom Viewport Width</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .test {
+            background-color: #f00;
+            color: #fff;
+            padding: 5px;
+            border: 1px solid #000;
+            width: 800px; /* Forces horizontal scroll on small screens */
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+    </style>
+
+    <script>
+        /*
+          This script measures the actual inner width and height of the viewport in CSS pixels.
+          window.innerWidth → visible width of the browser content area
+          window.innerHeight → visible height of the browser content area
+
+          On mobile devices, if the browser ignores "width=200",
+          you will still see the device’s real width (e.g., around 390–400 px).
+        */
+        window.addEventListener('load', function () {
+            let windowWidth = window.innerWidth;
+            let windowHeight = window.innerHeight;
+
+            alert('Window width is: ' + windowWidth + ' px\nWindow height is: ' + windowHeight + ' px');
+        });
+    </script>
+</head>
+
+<body>
+<div class="test">
+    hello world! (width=200, initial-scale=1, maximum-scale=1, user-scalable=yes)
+</div>
+</body>
+</html>

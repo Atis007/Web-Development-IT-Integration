@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="vts">
+    <meta name="viewport" content="width=device-width, minimum-scale=0.5, user-scalable=yes">
+
+    <title>Test 7 – Combined Media Query Example</title>
+
+    <style>
+        body {
+            background-color: lightgreen;
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            font-size: 1.1em;
+            padding: 16px;
+        }
+
+        /*
+          MEDIA QUERY EXPLANATION
+          ------------------------
+          "only screen" → targets screen devices (the "only" keyword is optional).
+          "(orientation: landscape)" → applies when the screen is wider than it is tall.
+          "(min-width: 320px)" and "(max-width: 767px)" → restricts this rule
+            to small screens such as smartphones (roughly 320–767 px wide).
+
+          Together:
+          → The body background changes to lightblue only when
+            the device is in landscape mode AND the width is between 320px and 767px.
+        */
+        @media only screen and (orientation: landscape) and (min-width: 320px) and (max-width: 767px) {
+            body {
+                background-color: lightblue;
+            }
+        }
+
+        /*
+          "only" is a legacy keyword; it's not required in modern browsers.
+          It's kept here for demonstration and backward compatibility.
+        */
+    </style>
+</head>
+
+<body>
+<p>
+    Resize the browser window or rotate your device.
+    When the orientation is landscape <strong>and</strong> the screen width is between 320px and 767px,
+    the background color becomes <strong>lightblue</strong>.
+    Otherwise, it remains <strong>lightgreen</strong>.
+</p>
+
+<p>
+    Orientation test: <em>portrait</em> or <em>landscape</em> (try rotating your phone or tablet).
+</p>
+</body>
+</html>
