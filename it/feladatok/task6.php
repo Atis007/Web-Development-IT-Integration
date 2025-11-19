@@ -2,7 +2,7 @@
 $title = "Task6";
 include 'includes/header.php';
 ?>
-<table>
+<table border="1">
     <caption>Table</caption>
     <tr>
         <td>1.1</td>

@@ -2,7 +2,7 @@
 $title = "Task7";
 include 'includes/header.php';
 ?>
-<table>
+<table border="1">
     <tr>
         <td><img src="kepek/me.jpg" alt="A picture about me" style="width: 180px; height: auto"></td>
         <td colspan="2"><p>Tóth Attila</p></td>
