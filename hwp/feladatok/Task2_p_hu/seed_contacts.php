@@ -27,6 +27,11 @@ $fakers = [
 $startDate = new DateTime('2000-01-01 00:00:00');
 $endDate = new DateTime();
 
+$number = getData($pdo);
+if (!$number){
+    echo "Meg nincs adat a tablaban";
+}
+
 for ($i = 1; $i <= 1000; $i++) {
 
     $localeKey = array_rand($fakers);
@@ -39,10 +44,11 @@ for ($i = 1; $i <= 1000; $i++) {
     $city = $faker->city();
     $date = $faker->dateTimeBetween($startDate, $endDate)->format('Y.m.d H:i:s');
 
+    //insertData($pdo, $firstName, $lastName, $email, $street, $city, $date);
 
     echo "#$i [$localeKey] $firstName $lastName email: $email – $street, $city. Date issued: $date<br>";
 }
 
-for($i = 1; $i <= 1000; $i++) {}
-insertData($pdo, $firstName, $lastName, $email, $street, $city, $date);
-getData($pdo);
+if ($number){
+    echo "Rekordok szama a contacts táblában: " . $number;
+}

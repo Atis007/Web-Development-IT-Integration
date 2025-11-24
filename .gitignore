@@ -23,3 +23,8 @@ config.php
 *.doc
 *.docx
 *.txt
+*.png
+*.jpg
+*.jpeg
+
+phpqrcode/
