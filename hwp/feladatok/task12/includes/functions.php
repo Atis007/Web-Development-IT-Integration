@@ -51,3 +51,28 @@ function insertIntoProducts(string $id, string $name, int $price): void{
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$id, $name, $price]);
 }
+
+function getProductsData(array $columns = []): array{
+    $pdo = $GLOBALS['pdo'];
+
+    $valid = ['id_product','name','price','id_category'];
+
+    $requested = array_intersect($columns, $valid);
+
+    $cols = empty($requested) ? '*' : implode(', ', $requested);
+
+    $sql = "SELECT $cols from task12products ORDER BY name";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function deleteProduct(int $id): void{
+    $pdo = $GLOBALS['pdo'];
+
+    $sql = "DELETE FROM task12products WHERE id_product = ?";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$id]);
+}

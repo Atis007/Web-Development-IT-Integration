@@ -3,7 +3,7 @@ require_once 'includes/config.php';
 require_once 'includes/functions.php';
 
 $categories = getCategoriesData();
-//$products = getProductsData(['id_product', 'name']);
+$products = getProductsData(['id_product', 'name']);
 
 //var_dump($categories, $products);
 ?>
@@ -98,7 +98,22 @@ $categories = getCategoriesData();
 <fieldset>
     <legend>Delete Product</legend>
 
-    <!-- TO DO -->
+    <form action="operation.php" method="post">
+        <input type="hidden" name="form_type" value="delete_product">
+
+        <label for="id_product">Product that needs to be deleted:</label>
+        <select name="id_product" id="id_product" required>
+            <option value="">-- Select product --</option>
+            <?php
+            foreach ($products as $product) {
+                echo '<option value="' . $product['id_product'] . '">' . $product['name'] . '</option>';
+            }
+            ?>
+        </select>
+        <div class="form-actions">
+            <input type="submit" value="Delete Product">
+        </div>
+    </form>
 </fieldset>
 
 </body>
