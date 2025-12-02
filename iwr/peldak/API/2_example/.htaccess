@@ -1,0 +1,20 @@
+RewriteEngine On
+RewriteBase /iws_2025/06/API/2_example/
+RewriteRule . index.php
+
+# RewriteEngine On
+
+# Enables the URL rewriting engine.
+
+# RewriteBase /iws_2025/06/API/2_example/
+
+# Sets the base URL path for the rewrite rules. Here, the base is set to /iws_2025/06/API/2_example/, so the rewrite rules will
+# apply to URLs within this subdirectory.
+# This is especially useful if the .htaccess file is not in the root directory of the website, as it tells Apache the
+# subdirectory from which to consider paths.
+
+# RewriteRule . index.php
+
+# This rule matches any URL request within the base directory (. is a wildcard that matches any single character or path).
+# All matching requests are redirected to index.php, meaning any URL within /iws_2024/06/Api2/ will load index.php,
+# allowing it to handle routing, parameters, and responses.

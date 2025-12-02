@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>php 64</title>
+    <style>
+        .bg1 {
+            background-color: #f00;
+        }
+    </style>
+</head>
+<body>
+<form method="post" name="upload" action="64.php" enctype="multipart/form-data">
+
+    <!--
+         <input type="hidden" name="MAX_FILE_SIZE" value="102400" >
+
+      File: <input type="file" name="file[]"  multiple><br><br>
+     -->
+
+    <label for="alias">Alias:</label><input type="text" name="alias" id="alias"> <br>
+    <label for="if">File:</label>
+
+    <input type="file" name="file" id="if"><br><br>
+
+    <input type="submit" name="sb" id="sb" value="upload">
+    <input type="reset" name="rb" id="rb" value="cancel">
+
+</form>
+</body>
+</html>

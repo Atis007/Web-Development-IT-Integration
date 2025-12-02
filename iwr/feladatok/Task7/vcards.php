@@ -28,6 +28,7 @@ foreach($workers as $worker) {
     $qr->updated_at = $faker->dateTimeBetween('2025-01-01 0:0:0', 'now')->format('Y-m-d H:i:s');
 
     insertQrCode($pdo, $qr);
+    echo "Inserted worker and qrcode";
 }
 
 include_once 'includes/footer.php';

@@ -1,0 +1,6 @@
+RewriteEngine On    # Turn on the rewriting engine
+
+RewriteRule ^api/([0-9a-z_-]*)$ api.php?name=$1 [NC,L]
+# RewriteRule ^news/([0-9a-z_-]*)/([0-9]*)$ news.php?name=$1&id=$2 [NC,L]
+# https://httpd.apache.org/docs/2.4/rewrite/intro.html
+# https://httpd.apache.org/docs/2.4/rewrite/flags.html

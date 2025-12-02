@@ -1,0 +1,15 @@
+RewriteEngine On    # Turn on the rewriting engine
+
+# RewriteRule ^data/([0-9a-z_-]*)$ data.php?name=$1 [NC,L]
+RewriteRule ^data/([0-9a-z_-]*)/([0-9]*)$ data.php?name=$1&id=$2 [NC,L]
+ErrorDocument 404 /iskola/iwr/peldak/API/0_example/404.php
+# ErrorDocument 404 /404.php
+# https://httpd.apache.org/docs/2.4/rewrite/intro.html
+# https://httpd.apache.org/docs/2.4/rewrite/flags.html
+
+# NC  (No Case) – makes the rule case-insensitive, so URLs match
+#      regardless of uppercase or lowercase characters.
+#
+# L   (Last) – stops processing any further rewrite rules once this
+#      rule matches. This prevents additional rules from interfering
+#      with the current rewrite.
