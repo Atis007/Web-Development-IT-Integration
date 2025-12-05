@@ -43,6 +43,14 @@ function getCategoriesData(): array
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * Inserting into the products database
+ *
+ * @param string $id
+ * @param string $name
+ * @param int $price
+ * @return void
+ */
 function insertIntoProducts(string $id, string $name, int $price): void{
     $pdo = $GLOBALS['pdo'];
 
@@ -52,6 +60,13 @@ function insertIntoProducts(string $id, string $name, int $price): void{
     $stmt->execute([$id, $name, $price]);
 }
 
+/**
+ * Getting back the products from the data, and checking if the columns are valid, only accepting
+ * id_product,name,price and id_category
+ *
+ * @param array $columns
+ * @return array
+ */
 function getProductsData(array $columns = []): array{
     $pdo = $GLOBALS['pdo'];
 
@@ -68,6 +83,12 @@ function getProductsData(array $columns = []): array{
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * deleting products from the products table, where the ids are matching
+ *
+ * @param int $id
+ * @return void
+ */
 function deleteProduct(int $id): void{
     $pdo = $GLOBALS['pdo'];
 

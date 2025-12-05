@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 15</title>
+    <style>
+        body {
+            margin: 0;
+
+        }
+
+        #container {
+            margin: 0 auto;
+            width: 720px;
+            border: 5px solid #c5c5c5;
+            background: linear-gradient(
+                    to right,
+                    #f00 0, /* left */ #f00 240px,
+                    #00f 240px, /* content */ #00f 480px,
+                    #0f0 480px, /* right */ #0f0 720px
+            );
+            overflow: auto;
+        }
+
+        #header {
+            text-align: center;
+            background: #ff0;
+            padding: 20px;
+        }
+
+        #left {
+            background: #f00;
+            padding: 10px;
+            width: 220px;
+            float: left;
+        }
+
+        #content {
+            background: #00f;
+            padding: 10px;
+            width: 220px;
+            float: left;
+        }
+
+        #right {
+            background: #0f0;
+            padding: 10px;
+            width: 220px;
+            float: left;
+        }
+
+        #footer {
+            background: #a5a5a5;
+            float: left;
+            width: 710px;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="container">
+
+    <div id="header">
+        header
+    </div>
+    <div id="left">left</div>
+    <div id="content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus condimentum pulvinar ante. Praesent auctor
+        leo at erat pellentesque, at tristique tellus bibendum. Ut fermentum mi ex, vel gravida enim molestie ac. Ut
+        lacinia tincidunt elit, in vestibulum turpis consequat at. Sed sapien nulla, feugiat in consectetur eget,
+        sollicitudin nec augue. Vestibulum nunc magna, eleifend ac feugiat ut, fermentum ac nisl. Vestibulum interdum
+        molestie ipsum eu finibus. Aliquam vitae bibendum diam, ut commodo lectus. Proin eu turpis varius, semper quam
+        et, mollis ex.
+    </div>
+    <div id="right">right</div>
+    <div id="footer">footer</div>
+</div>
+</body>
+</html>

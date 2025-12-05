@@ -1,0 +1,61 @@
+/* LoVe HAte */
+
+
+a:link {
+    text-decoration: none;
+    color: #00f;
+}
+
+a:visited {
+    color: #090;
+    text-decoration: underline;
+}
+
+a:hover {
+    background-color: #00f;
+    color: #fff;
+}
+
+a:active {
+    border: 1px solid #00f;
+    color: #00f;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+a.first:link {
+    text-decoration: none;
+    color: #f00;
+}
+
+a.first:visited {
+    color: #090;
+    text-decoration: underline;
+}
+
+a.first:hover {
+    background-color: #f00;
+    color: #fff;
+}
+
+a.first:active {
+    border: 1px solid #f00;
+    color: #f00;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+/*
+  NOTE about :visited:
+  Modern browsers intentionally restrict which CSS properties can be applied
+  to the :visited pseudo-class for privacy reasons. This prevents websites from
+  detecting which links a user has previously visited.
+
+  Only a small set of “safe” properties (mainly color-related ones) can be
+  applied to :visited. Properties such as text-decoration, font-weight,
+  font-size, margins, borders (except border-color), and layout-changing
+  properties are ignored.
+
+  Therefore, text-decoration on a:visited will NOT work, even if the code is correct.
+  Use color changes instead when styling visited links.
+*/

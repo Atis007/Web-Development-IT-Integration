@@ -1,0 +1,25 @@
+div {
+    color: #fff;
+}
+
+#grad1 {
+    background-image: radial-gradient(red, green, blue);
+}
+
+#grad2 {
+    background-image: radial-gradient(red 5%, green 15%, blue 60%);
+}
+
+#grad3 {
+    height: 200px;
+    background-image: radial-gradient(ellipse at left, red, yellow, green); /* ellipse or circle */
+}
+
+#grad4 {
+    height: 100px;
+    background-image: radial-gradient(closest-side at 60% 55%, blue, green, yellow, black);
+}
+
+#grad5 {
+    background-image: radial-gradient(farthest-side at 60% 55%, blue, green, yellow, black);
+}

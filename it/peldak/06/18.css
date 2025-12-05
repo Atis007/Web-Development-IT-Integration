@@ -1,0 +1,11 @@
+.decimal {
+    list-style-type: decimal-leading-zero;
+}
+
+.border {
+    border: 1px solid #000;
+}
+
+.inside {
+    list-style-position: inside;
+}

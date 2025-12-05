@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example 39</title>
+</head>
+<body>
+<form name="form" method="post" action="process.php">
+    Birthday: <input type="date" name="birthday" required min="1960-01-01" max="2000-01-31"><br>
+    <!-- type="datetime-local" -->
+    Years of experience: <input type="number" name="experience" min="1" max="10" value="1" step="1"><br>
+    Points: <input type="range" name="points" min="0" max="100" value="10"><br>
+    Time: <input type="time" name="user_time">
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

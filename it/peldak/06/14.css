@@ -1,0 +1,15 @@
+#first {
+    padding: 10px 20px;
+    background-color: #e5e5e5;
+}
+
+#second {
+    margin: 40px;
+    background-color: #c5c5c5;
+    padding: 10px 20px;
+}
+
+#third {
+    margin: auto;
+    background-color: #d5d5d5;
+}

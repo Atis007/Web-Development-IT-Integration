@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example 42</title>
+</head>
+<body>
+<form name="form" method="post" action="film.php">
+    Which of the listed movies have you watched? You can select multiple values!
+    <br><br>
+
+    <select name="film[]" multiple size="3">
+        <optgroup label="Sci-Fi">
+            <option value="matrix">Matrix</option>
+            <option value="terminator">Terminator</option>
+            <option value="starwars">Star Wars</option>
+        </optgroup>
+        <optgroup label="War">
+            <option value="d-day">D-Day</option>
+            <option value="dirty dozen">Dirty Dozen</option>
+            <option value="black hawk down">Black Hawk Down</option>
+        </optgroup>
+    </select>
+    <br><br>
+    <input type="submit" name="sd" value="Submit">
+    <input type="reset" name="rd" value="Reset">
+</form>
+</body>
+</html>

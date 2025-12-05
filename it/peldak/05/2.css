@@ -1,0 +1,23 @@
+h1, h2 {
+    font-family: Arial, sans-serif;
+    color: #0000ff;
+    font-size: 16px;
+}
+
+h3 {
+    font-family: Arial, sans-serif;
+    color: #ff0000;
+    font-size: 20px;
+}
+
+h3.green {
+    color: #00ff00;
+}
+
+.blue {
+    color: blue;
+}
+
+.italic {
+    font-style: italic;
+}

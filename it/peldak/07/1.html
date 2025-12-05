@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Selectors</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 30px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            margin-top: 35px;
+        }
+
+        section {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* ===================== BASIC SELECTORS ===================== */
+
+        /* Universal selector */
+        * {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Type selector */
+        p {
+            color: #000000;
+        }
+
+        /* Class selector */
+        .highlight {
+            background-color: #FFFF00;
+        }
+
+        /* ID selector */
+        #unique {
+            background-color: #00AA00;
+            color: #FFFFFF;
+            padding: 5px;
+        }
+
+        /* Group selector */
+        h2, h3 {
+            color: #CC0000;
+        }
+
+        /* ===================== HIERARCHICAL SELECTORS ===================== */
+
+        /* Descendant selector */
+        #container p {
+            color: #005CAA;
+        }
+
+        /* Child selector (direct children only) */
+        #container > p {
+            font-weight: bold;
+        }
+
+        /* Adjacent sibling – first element directly after selector */
+        #container + p {
+            color: #FF00FF;
+        }
+
+        /* General sibling – all next siblings of same level */
+        #box ~ p {
+            color: #AA00CC;
+        }
+
+        /* ===================== ATTRIBUTE SELECTORS ===================== */
+
+        /* Has attribute */
+        a[target] {
+            font-weight: bold;
+            color: #007BFF;
+        }
+
+        /* Attribute with exact value */
+        a[target="_blank"] {
+            color: #FF0000;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>CSS Selectors – Visual Examples</h1>
+
+
+<!-- =============================================================== -->
+<section>
+    <h2>1) Basic selectors</h2>
+
+    <p>This is a normal paragraph (type selector).</p>
+    <p class="highlight">This paragraph uses a class (.highlight).</p>
+    <p id="unique">This paragraph has an ID (#unique).</p>
+</section>
+
+
+<!-- =============================================================== -->
+<section id="container">
+    <h2>2) Hierarchical selectors</h2>
+
+    <p>Direct child of #container → bold + blue text.</p>
+
+    <div>
+        <p>Paragraph inside a div → only blue text (descendant).</p>
+    </div>
+</section>
+
+<p>First paragraph AFTER #container → magenta (adjacent sibling).</p>
+<p>Second paragraph → no effect from adjacent rule.</p>
+
+
+<!-- =============================================================== -->
+<section>
+    <h2>3) General sibling selector</h2>
+
+    <div id="box">A reference block</div>
+    <p>All paragraphs below #box are affected → purple text.</p>
+    <p>And this one too.</p>
+</section>
+
+
+<!-- =============================================================== -->
+<section>
+    <h2>4) Attribute selectors</h2>
+
+    <a href="#">Regular link</a><br>
+    <a href="#" target="_self">Has attribute target="_self"</a><br>
+    <a href="#" target="_blank">Opens in new tab (target="_blank")</a><br>
+</section>
+
+</body>
+</html>

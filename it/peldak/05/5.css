@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #000000; /* default black */
+}
+
+.t1 {
+    color: #ff0000; /* red */
+}
+
+.t2 {
+    color: unset; /* returns to default (#000000) */
+}

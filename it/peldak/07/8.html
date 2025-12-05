@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Position: Absolute + Z-index</title>
+    <style>
+        .parent {
+            width: 400px;
+            height: 220px;
+            background: #cccccc;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .box1 {
+            width: 180px;
+            height: 100px;
+            background: #ff4444;
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: #fff;
+            padding: 10px;
+            z-index: 1;
+        }
+
+        .box2 {
+            width: 180px;
+            height: 100px;
+            background: #0066ff;
+            position: absolute;
+            top: 60px;
+            left: 80px;
+            color: #fff;
+            padding: 10px;
+            z-index: 5;
+        }
+
+    </style>
+</head>
+<body>
+
+<h2>Position: Absolute + Z-index</h2>
+<p>The two boxes overlap. Notice how <strong>z-index</strong> controls which one appears on top.</p>
+<p><code>box2</code> has a higher z-index value, so it overlays <code>box1</code>.</p>
+
+<div class="parent">
+    <div class="box1">Box 1 (z-index: 1)</div>
+    <div class="box2">Box 2 (z-index: 5)</div>
+</div>
+
+</body>
+</html>

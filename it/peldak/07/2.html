@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Pseudo-Classes</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            padding: 30px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        section {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 25px;
+        }
+
+        /* 1) HOVER -------------------------------------- */
+        button.hover-demo:hover {
+            background: #007BFF;
+            color: #FFFFFF;
+            transform: scale(1.05);
+            transition: 0.2s;
+        }
+
+        /* 2) ACTIVE ------------------------------------- */
+        button.active-demo:active {
+            background: #CC0000;
+            color: #FFFFFF;
+        }
+
+        /* 3) FOCUS -------------------------------------- */
+        input.focus-demo:focus {
+            border: 2px solid #00AAFF;
+            outline: none;
+        }
+
+        /* 4) CHECKED ------------------------------------ */
+        input.check-demo:checked + label {
+            color: #008000;
+            font-weight: bold;
+        }
+
+        /* 5) DISABLED ----------------------------------- */
+        button:disabled {
+            background: #A0A0A0;
+            color: #FFFFFF;
+            cursor: not-allowed;
+        }
+
+        /* 6) FIRST-CHILD -------------------------------- */
+        ul li:first-child {
+            color: #FF0000;
+            font-weight: bold;
+        }
+
+        /* 7) LAST-CHILD --------------------------------- */
+        ul li:last-child {
+            color: #005CAA;
+            font-style: italic;
+        }
+
+        /* 8) REQUIRED ----------------------------------- */
+        input:required {
+            border: 2px solid #FF0000;
+        }
+
+        /* 9) VISITED ------------------------------------ */
+        a.visited-demo:visited {
+            color: #551A8B; /* default visited link purple */
+        }
+
+        /* 10) NOT() ------------------------------------- */
+        li:not(.exclude) {
+            background: #F0F0F0;
+            padding: 3px;
+            margin: 2px 0;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h1>CSS Pseudo-Classes</h1>
+
+<section>
+    <h2>1) :hover</h2>
+    <button class="hover-demo">Hover over me</button>
+</section>
+
+<section>
+    <h2>2) :active</h2>
+    <button class="active-demo">Click me (hold mouse down)</button>
+</section>
+
+<section>
+    <h2>3) :focus</h2>
+    <label for="focus">
+        <input type="text" class="focus-demo" placeholder="Click here to focus" name="focus" id="focus">
+    </label>
+</section>
+
+<section>
+    <h2>4) :checked</h2>
+    <input type="checkbox" id="cb1" class="check-demo" name="checkbox_check">
+    <label for="cb1">Checkbox is checked → text becomes green & bold</label>
+</section>
+
+<section>
+    <h2>5) :disabled</h2>
+    <button disabled>Disabled button</button>
+</section>
+
+<section>
+    <h2>6 & 7) :first-child / :last-child</h2>
+    <ul>
+        <li>First child (bold + red)</li>
+        <li>Middle item</li>
+        <li>Last child (blue + italic)</li>
+    </ul>
+</section>
+
+<section>
+    <h2>8) :required</h2>
+    <label for="required_text">
+        <input type="text" required placeholder="Required field is red-bordered" id="required_text"
+               name="required_text">
+    </label>
+</section>
+
+<section>
+    <h2>9) :visited</h2>
+    <a href="https://www.vts.su.ac.rs" class="visited-demo" target="_blank">Subotica Tech - College of Applied
+        Sciences</a>
+</section>
+
+<section>
+    <h2>10) :not()</h2>
+    <ul>
+        <li>Styled with :not()</li>
+        <li class="exclude">Excluded item (no gray background)</li>
+        <li>Styled with :not()</li>
+    </ul>
+</section>
+
+</body>
+</html>

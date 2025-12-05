@@ -1,0 +1,20 @@
+#first {
+    padding: 10px 20px;
+    background-color: #e5e5e5;
+    border:1px solid #000;
+}
+
+#second {
+    margin: 40px;
+    background-color: #c5c5c5;
+    padding: 10px 20px;
+    border:20px ridge #000;
+}
+
+#third {
+    margin: auto;
+    background-color: #d5d5d5;
+    border: 3px dotted #000;
+    width: 800px;
+    padding: 10px;
+}

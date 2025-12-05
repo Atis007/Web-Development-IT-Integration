@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example 40</title>
+</head>
+<body>
+<form name="form" method="post" action="browser.php">
+    Favorite web browser:
+    <input list="browsers" name="browser" required>
+    <datalist id="browsers">
+        <option value="Exdge">
+        <option value="Firefox">
+        <option value="Chrome">
+        <option value="Opera">
+        <option value="Safari">
+    </datalist>
+    <br><br>
+    Country:
+    <input type="text" name="country" value="Serbia" readonly> <!-- disabled -->
+    <br><br>
+    <input type="submit" name="sd" value="Submit">
+    <input type="reset" name="rd" value="Reset">
+</form>
+</body>
+</html>

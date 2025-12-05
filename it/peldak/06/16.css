@@ -1,0 +1,17 @@
+#first {
+    width: 700px;
+    background-color: #e5e5e5;
+}
+
+#second {
+    width: 700px;
+    padding: 25px;
+    box-sizing: border-box;
+    background-color: lightblue;
+}
+
+#third {
+    width: 700px;
+    padding: 25px;
+    background-color: #e5e5e5;
+}

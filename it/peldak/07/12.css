@@ -1,0 +1,46 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    text-align: center;
+    color: #000;
+}
+
+#container {
+    margin: 0 auto;
+    padding: 0;
+    width: 600px;
+}
+
+#header {
+    background: #ff0000;
+    width: 600px;
+    height: 40px;
+    line-height: 40px;
+}
+
+#left {
+    background: #00ff00;
+    width: 150px;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+}
+
+#content {
+    background: #0000ff;
+    width: 450px;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+}
+
+#footer {
+    background: #ffff00;
+    width: 600px;
+    clear: both;
+    height: 40px;
+    line-height: 40px;
+}

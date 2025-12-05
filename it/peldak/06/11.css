@@ -1,0 +1,11 @@
+#image1 {
+    background: url("globe.jpg");
+    background-repeat: no-repeat;
+    background-size: 50% 100%;
+}
+
+#image2 {
+    background: url("globe.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}

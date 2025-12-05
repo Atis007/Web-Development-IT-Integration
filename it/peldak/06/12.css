@@ -1,0 +1,5 @@
+#image1 {
+    background: url("globe.jpg"), url("subotica.jpg");
+    background-repeat: no-repeat, no-repeat;
+    background-size: contain, cover;
+}

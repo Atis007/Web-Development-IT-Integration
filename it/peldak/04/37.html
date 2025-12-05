@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example 37</title>
+</head>
+<body>
+<form name="form" method="post" action="upload.php" enctype="multipart/form-data">
+    Upload your picture!
+    <br><br>
+    <label for="image">Image: </label>
+    <input type="file" name="image" id="image" accept="image/*">
+    <!--
+    <input type="file" name="image[]" id="image" accept="image/*" multiple>
+    http://www.iana.org/assignments/media-types/media-types.xhtml
+    -->
+    <br><br>
+    <input type="submit" name="sd" value="Submit">
+    <input type="reset" name="rd" value="Reset">
+</form>
+</body>
+</html>
