@@ -3,7 +3,7 @@ $title = "Meta tags, iframe and semantic tags";
 include 'includes/header.php';
 ?>
 <header>
-    <h1>Welcome to Task 3</h1>
+    <h1>Welcome to Task 8</h1>
     <p>Semantic HTML, meta tags and embedded videos</p>
 </header>
 <main>

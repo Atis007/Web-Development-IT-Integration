@@ -15,6 +15,7 @@ include 'includes/header.php';
                 <li>Zenta</li>
                 <li>Đure Đakovića 14</li>
                 <li>tothattila5559@gmail.com</li>
+                <li><a href="resume.php">My Resume<a></li>
             </ul>
         </td>
         <td colspan="1">
