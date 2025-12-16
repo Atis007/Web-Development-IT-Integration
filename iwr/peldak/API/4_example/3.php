@@ -7,7 +7,7 @@ $client = new Client();
 $response = $client->request('GET', 'https://jsonplaceholder.typicode.com/posts/1');
 
 $status = $response->getStatusCode();
-echo "Status Code: $status\n";
+echo "Status Code: $status <br>";
 
 $body = $response->getBody();
 echo "Response Body: $body\n";

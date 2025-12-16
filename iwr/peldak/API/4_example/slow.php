@@ -19,4 +19,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 http_response_code($response['status']);
 echo json_encode($response, JSON_UNESCAPED_UNICODE);
-echo "VTS";

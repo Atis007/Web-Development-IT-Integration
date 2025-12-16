@@ -80,7 +80,7 @@ header("HTTP/1.1 404 Not Found");
     <div class="message">Oops! This page doesn’t exist.</div>
     <div class="details">The resource you are looking for might have been moved, deleted, or never existed.</div>
 
-    <a href="/iskola/iwr/peldak/API/0_example/" class="btn">Back to Home</a>
+    <a href="/iws_2025/06/API/" class="btn">Back to Home</a>
 </div>
 
 </body>

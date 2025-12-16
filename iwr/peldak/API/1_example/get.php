@@ -25,9 +25,11 @@
         if (isset($_POST['submit'])) {
             $name = $_POST['name'];
 
-            $url = "http://localhost/iskola/iwr/peldak/API/1_example/api/" . $name;
+            $url = "http://localhost/iws_2025/06/API/1_example/api/" . $name;
             echo $url;
 
+            // http://localhost/iws_2025/06/API/1_example/api/vts
+            // http://localhost/iws_2025/06/API/1_example/get.php
 
             $client = curl_init($url);
             curl_setopt($client, CURLOPT_RETURNTRANSFER, true);

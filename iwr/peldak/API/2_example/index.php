@@ -12,6 +12,8 @@ header("Content-type: application/json; charset=UTF-8");
 
 $parts = explode("/", $_SERVER["REQUEST_URI"]);
 
+//var_dump($parts);
+
 $position = array_search("products", $parts);
 
 if (!$position) {
@@ -20,7 +22,7 @@ if (!$position) {
 }
 $id = $parts[$position + 1] ?? null;
 
-$database = new Database("localhost", "iws", "root", "");
+$database = new Database("localhost", "iwr", "root", "");
 
 $gateway = new ProductGateway($database);
 
@@ -28,9 +30,9 @@ $controller = new ProductController($gateway);
 
 $controller->processRequest($_SERVER["REQUEST_METHOD"], $id);
 
-# http://localhost/iws_2025/06/API/2_example/api/products/1
-# http://localhost/iws_2025/06/api/2_example/api/books
-# http://localhost/iws_2025/06/API/2_example/api/products
+# http://localhost/iskola/iwr/peldak/API/2_example/api/products/1
+# http://localhost/iskola/iwr/peldak/API/2_example/api/products
+# http://localhost/iskola/iwr/peldak/API/2_example/api/books
 
 /*
 

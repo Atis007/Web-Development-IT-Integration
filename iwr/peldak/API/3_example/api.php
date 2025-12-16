@@ -2,8 +2,9 @@
 header("Content-Type: application/json; charset=UTF-8");
 header("Allow: GET");
 
-// http://localhost/iws_2025/06/API/3_example/api/product?table=product
-
+// http://localhost/iskola/iwr/peldak/API/3_example/api/product?table=product
+// http://localhost/iskola/iwr/peldak/API/3_example/api/product
+//
 $table = $_GET['table'] ?? "";
 
 /**

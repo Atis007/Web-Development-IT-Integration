@@ -3,7 +3,6 @@ require 'config.php';
 require 'includes/functions.php';
 
 $pdo = connectDatabase($dsn, $pdoOptions);
-
 // Generate 250 rows
 for ($i = 0; $i < 250; $i++) {
     $text = generateText();

@@ -7,11 +7,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 $client = new Client();
-$url = 'http://localhost/iws_2025/06/API/4_example/slow.php';
+$url = 'http://localhost/iskola/iwr/peldak/API/4_example/slow.php';
 
 try {
     $response = $client->request('GET', $url, [
-        'timeout' => 2.0, // seconds
+        'timeout' => 4.0, // seconds
         'headers' => [
             'Accept' => 'application/json',
         ],

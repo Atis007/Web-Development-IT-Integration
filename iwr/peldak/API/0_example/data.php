@@ -1,4 +1,17 @@
 <?php
+
+/*
+
+http://localhost/iws_2025/06/API/0_example/data.php?name=vts
+http://localhost/iws_2025/06/API/0_example/data.php
+
+http://localhost/iws_2025/06/API/0_example/data/vts
+http://localhost/iws_2025/06/API/0_example/data/
+http://localhost/iws_2025/06/API/0_example/data
+
+ */
+
+
 $name = $_GET['name'] ?? "";
 $id = $_GET['id'] ?? 0;
 

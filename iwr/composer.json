@@ -3,6 +3,7 @@
         "mobiledetect/mobiledetectlib": "^4.8",
         "phpmailer/phpmailer": "^7.0",
       "ext-pdo": "*",
-      "ext-exif": "*"
+      "ext-exif": "*",
+      "ext-mysqli": "*"
     }
 }

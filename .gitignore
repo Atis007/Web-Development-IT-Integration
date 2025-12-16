@@ -28,3 +28,4 @@ config.php
 *.jpeg
 
 phpqrcode/
+challenge-based-tasks

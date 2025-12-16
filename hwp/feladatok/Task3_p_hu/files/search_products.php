@@ -10,6 +10,7 @@ $minPrice = $minPrice === '' ? null : (int)$minPrice;
 $maxPrice = $maxPrice === '' ? null : (int)$maxPrice;
 
 $result = searchProducts($pdo, $name, $minPrice, $maxPrice, $category);
+var_dump($result);
 $products = $result['products'];
 $stats = $result['stats'];
 ?>

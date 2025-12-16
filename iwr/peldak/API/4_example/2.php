@@ -7,7 +7,6 @@ $url = "https://v2.jokeapi.dev/joke/Programming";
 $client = new Client();
 $response = $client->request('GET', $url, [
     'query' => [
-        'type' => 'single',
         'amount' => 10
     ]
 ]);
