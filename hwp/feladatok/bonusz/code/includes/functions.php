@@ -33,49 +33,86 @@ function insertIntoWords(PDO $pdo, string $word): void{
     $stmt->execute();
 }
 
-function getDataFromWords(PDO $pdo): array{
-    $sql = "SELECT word FROM bonuszwords";
+function fetchAllWords(PDO $pdo): array{
+    $sql = "SELECT id_word, word FROM bonuszwords";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function levenshteinDistance(string $input): array{
+function fetchWordsByLength(PDO $pdo, int $min, int $max): array{
+    $sql = "SELECT id_word, word FROM bonuszwords_indexed WHERE word_length BETWEEN :min AND :max";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':min', $min);
+    $stmt->bindParam(':max', $max);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function levenshteinDistance(string $input, bool $useLengthConstraint, int $min = 1, int $max = 21): array{ // if the user is not added min or max values, then need values where
     $pdo = $GLOBALS['pdo'];
-    $words = getDataFromWords($pdo);
+
+    $start = microtime(true);
+
+    if ($useLengthConstraint) {
+        $words = fetchWordsByLength($pdo, $min, $max);
+        $constraint = 'used';
+    } else {
+        $words = fetchAllWords($pdo);
+        $constraint = 'not_used';
+    }
+
+    if(empty($words)){
+        $totalMs = (microtime(true) - $start) * 1000;
+        return [-1, '', $totalMs, $constraint];
+    }
 
     // no shortest distance found, yet
     $shortest = -1;
+    $closestWord = '';
+    $closestWordId = 0;
 
     // loop through words to find the closest
-    foreach ($words as $word) {
+    foreach ($words as $row) {
         // calculate the distance between the input word,
         // and the current word
-        $lev = levenshtein($input, $word);
+        $lev = levenshtein($input, $row['word']);
 
         // check for an exact match
         if ($lev === 0) {
             // closest word is this one (exact match)
-            $closest = $word;
             $shortest = 0;
+            $closestWord = $row['word'];
+            $closestWordId = $row['id_word'];
             // break out of the loop; we've found an exact match
             break;
         }
 
         // if this distance is less than the next found shortest
         // distance, OR if a next shortest word has not yet been found
-        if ($lev <= $shortest || $shortest < 0) {
+        if ($shortest < 0 || $lev < $shortest) {
             // set the closest match, and shortest distance
-            $closest  = $word;
             $shortest = $lev;
+            $closestWord  = $row['word'];
+            $closestWordId = $row['id_word'];
         }
     }
 
-    if ($shortest === 0) {
-        $message = "Exact match found: $closest\n";
-    } else {
-        $message = "Did you mean: $closest?\n";
-    }
+    $totalMs = (microtime(true) - $start) * 1000;
+    return [$shortest, $closestWord, $closestWordId, $totalMs, $constraint];
+}
 
-    return [$message, $shortest, $lev, $closest];
+function insertIntoResults(PDO $pdo, string $closestWordId, string $input, int $distance, float $runtime, string $used): void{
+    $sql = "INSERT INTO bonuszresults (id_word, input, distance, date_time, runtime_ms, length_constraint) 
+            VALUES (:closestWordId, :input, :distance, NOW(), :runtime, :used)";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':closestWordId' => $closestWordId,
+        ':input' => $input,
+        ':distance' => $distance,
+        ':runtime' => $runtime,
+        ':used' => $used
+    ]);
 }

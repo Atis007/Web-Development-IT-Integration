@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /iskola/iwr/feladatok/Task9/
+
+# Allow direct access to existing files or folders
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Route /api/... requests to the API front controller
+RewriteRule ^api(?:/(.*))?$ api.php [QSA,NC,L]
+
+# Fallback to index.php for other requests (demo client)
+RewriteRule ^ index.php [L]
