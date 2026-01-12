@@ -3,28 +3,22 @@ session_start();
 require 'includes/functions.php';
 $pdo = $GLOBALS["pdo"];
 if($_SERVER["REQUEST_METHOD"] !== "POST"){
-    redirectFn("Only POST requests are allowed!");
+    redirectFn('',"Only POST requests are allowed!");
 }
 
-$pw = trim($_POST["password"]);
-$user = trim($_POST["username"]);
+$pw = $_POST["password"];
+$email = trim($_POST["email"]);
 
-if($pw === "" || $user === ""){
-    redirectFn("Must provide a username and password!");
+if($pw === "" || $email === ""){
+    redirectFn('',"Must provide an email and password!");
 }
-$result = checkUserExist($pdo, $user, $pw);
+$result = loginUser($pdo, $email, $pw);
+
+if(!$result){
+    redirectFn('',"Email or password is incorrect!");
+}
 
 $_SESSION["id_user"] = $result["id_user"];
-$_SESSION["level"] = $result["level"];
-$_SESSION["name"] = $result["name"];
+$_SESSION["role"] = $result["role"];
 
-if($result["id_user"] !== null){
-    if($result["level"] === "admin"){
-        header("Location: admin.php");
-    } else {
-        header("Location: photos.php");
-    }
-    exit;
-}
-
-echo $result['message'];
+header("Location: panel.php");

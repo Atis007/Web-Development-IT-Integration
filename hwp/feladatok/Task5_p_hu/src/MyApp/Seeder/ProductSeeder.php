@@ -5,6 +5,7 @@ namespace MyApp\Seeder;
 
 use Faker\Factory;
 use Faker\Generator;
+use MyApp\Model\Product;
 
 class ProductSeeder
 {
@@ -30,12 +31,12 @@ class ProductSeeder
         $products = [];
 
         for ($i = 0; $i < $count; $i++) {
-            $products[] = [
-                'name' =>     $this->faker->words(2, true),
-                'category' => $this->faker->randomElement(self::CATEGORIES),
-                'price' =>    $this->faker->randomFloat(2, 200, 5000),
-                'amount' =>   $this->faker->numberBetween(0, 250),
-            ];
+            $products[] = new Product(
+                name:     ucwords($this->faker->words(2, true)),
+                category: $this->faker->randomElement(self::CATEGORIES),
+                price:    $this->faker->randomFloat(2, 200, 5000),
+                amount:   $this->faker->numberBetween(0, 250),
+            );
         }
         return $products;
     }

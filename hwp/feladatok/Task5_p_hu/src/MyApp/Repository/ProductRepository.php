@@ -47,7 +47,7 @@ class ProductRepository
     }
 
     public function searchByName(string $query): array {
-        $sql = "SELECT category, price, amount FROM productstask5 WHERE name LIKE :name";
+        $sql = "SELECT name, category, price, amount FROM productstask5 WHERE name LIKE :name";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':name', "%$query%", PDO::PARAM_STR);
         $stmt->execute();
