@@ -1,6 +1,8 @@
 <?php
+session_start();
 require_once 'includes/functions.php';
 $pdo = $GLOBALS['pdo'];
+$currentUser = assertAuthenticated($pdo, ['user']);
 
 $title = "New Task";
 include 'includes/header.php';

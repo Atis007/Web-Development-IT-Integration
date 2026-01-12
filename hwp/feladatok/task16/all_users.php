@@ -2,11 +2,7 @@
 session_start();
 require 'includes/functions.php';
 $pdo = $GLOBALS["pdo"];
-
-// Ellenőrizzük, hogy be van-e lépve
-if (!isset($_SESSION['id_user'])) {
-    redirectFn('login', 'Please login first!');
-}
+$currentUser = assertAuthenticated($pdo, ['admin', 'supervisor']);
 
 // Lekérjük az összes felhasználót
 $users = getAllUsers($pdo);

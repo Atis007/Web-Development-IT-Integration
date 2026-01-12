@@ -1,6 +1,8 @@
 <?php
+session_start();
 require_once 'includes/functions.php';
 $pdo = $GLOBALS['pdo'];
+$currentUser = assertAuthenticated($pdo, ['admin', 'supervisor']);
 
 $title = "Edit Users";
 include 'includes/header.php';
@@ -14,7 +16,7 @@ $users = getUsers($pdo);
         <div class="mb-3">
             <label for="userSelect" class="form-label">Válassz egy "User" jogú felhasználót:</label>
 
-            <select name="selected_user_id" id="userSelect" class="form-select" required>
+            <select name="id_user" id="userSelect" class="form-select" required>
                 <option value="" selected disabled>-- Válassz a listából --</option>
 
                 <?php foreach ($users as $user): ?>
@@ -28,7 +30,7 @@ $users = getUsers($pdo);
 
         <div class="mb-3">
             <label for="city" class="form-label">Varos</label>
-            <input type="text" name="city" id="city" required>
+            <input type="text" name="city" id="city">
         </div>
 
         <div class="mb-3">
@@ -42,16 +44,16 @@ $users = getUsers($pdo);
         </div>
 
         <div class="mb-3">
-            <input type="radio" name="isActive" value="active" id="active" checked>
+            <input type="radio" name="status" value="active" id="active" checked>
             <label for="active">Active</label><br>
 
-            <input type="radio" name="isActive" value="inactive" id="inactive">
+            <input type="radio" name="status" value="inactive" id="inactive">
             <label for="inactive">Inactive</label><br>
         </div>
 
         <div class="mb-3">
             <label for="biography">Biografia</label><br>
-            <textarea rows="5" cols="40" name="biography" id="biography"></textarea>
+            <textarea rows="5" cols="40" name="biography" id="biography" required></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">Szerkesztés</button>

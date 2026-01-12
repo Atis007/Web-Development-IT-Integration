@@ -1,12 +1,14 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
+
 session_start();
 require 'includes/functions.php';
 $pdo = $GLOBALS["pdo"];
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+$currentUser = assertAuthenticated($pdo, ['admin', 'supervisor']);
 
-use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
@@ -14,15 +16,20 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     redirectFn('edit_users', "Only POST requests are allowed!");
 }
 
-$id = $_POST["id_user"];
-$salary = trim($_POST["salary"]);
-$city = trim($_POST["city"]);
-$pw = $_POST["passwordReset"];
-$bio = trim($_POST["biography"]);
-$userEmail = $_POST["email"];
+$id = isset($_POST["id_user"]) ? (int)$_POST["id_user"] : 0;
+$salary = trim($_POST["salary"] ?? '');
+$city = trim($_POST["city"] ?? '');
+$pw = $_POST["passwordReset"] ?? '';
+$bio = trim($_POST["biography"] ?? '');
+$status = $_POST['status'] ?? '';
 
-if ($id === "" || $salary === "" || $pw === "" || $bio === "") {
-    redirectFn('edit_users', "Must provide a selected user, a new salary, password, and biography!");
+if ($id === 0 || $salary === "" || $pw === "" || $bio === "" || $status === '') {
+    redirectFn('edit_users', "Must provide user, salary, password, biography and status!");
+}
+
+$targetUser = getUserById($pdo, $id);
+if (!$targetUser || $targetUser['role'] !== 'user') {
+    redirectFn('edit_users', "Selected user is invalid.");
 }
 
 if(!is_numeric($salary)){
@@ -33,123 +40,86 @@ if(strlen($pw) < 8){
     redirectFn('edit_users', "Password must be at least 8 characters!");
 }
 
+if(!in_array($status, ['active','inactive'], true)) {
+    redirectFn('edit_users', "Status must be active or inactive!");
+}
+
 $filteredBio = filterText($bio);
 
-$updated = updateUser($pdo, $id, $city, $salary, $pw, $filteredBio);
+$updated = updateUser($pdo, $id, $city, (int)$salary, $pw, $filteredBio, $status);
 
-if ($_SESSION['role'] === 'supervisor'){
-    $mail = new PHPMailer(true);
-    $adminMail = new PHPMailer(true);
+$mail = new PHPMailer(true);
+$adminMail = null;
 
-    try {
-        $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = $_ENV['MT_HOST'];                       //Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Port       = $_ENV['MT_PORT'];                       //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-        $mail->Username   = $_ENV['MT_USERNAME'];                       //SMTP username
-        $mail->Password   = $_ENV['MT_PASSWORD'];                       //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+try {
+    $mail->isSMTP();
+    $mail->Host       = $_ENV['MT_HOST'];
+    $mail->SMTPAuth   = true;
+    $mail->Port       = $_ENV['MT_PORT'];
+    $mail->Username   = $_ENV['MT_USERNAME'];
+    $mail->Password   = $_ENV['MT_PASSWORD'];
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->CharSet = 'UTF-8';
+    $mail->Encoding = 'base64';
 
-        $mail->CharSet = 'UTF-8';
-        $mail->Encoding = 'base64';
+    $mail->setFrom('no-reply@company.com', 'Admin');
+    $mail->addAddress($targetUser['email']);
 
-        $adminMail->isSMTP();                                            //Send using SMTP
-        $adminMail->Host       = $_ENV['MT_HOST'];                       //Set the SMTP server to send through
-        $adminMail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $adminMail->Port       = $_ENV['MT_PORT'];                       //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-        $adminMail->Username   = $_ENV['MT_USERNAME'];                       //SMTP username
-        $adminMail->Password   = $_ENV['MT_PASSWORD'];                       //SMTP password
+    $bodyMsg = "Your new salary: " . $updated['salary'] . "<br>" .
+        "Your new biography: " . $updated['biography'] . "<br>" .
+        "Your new password: " . $updated['password_updated'] . "<br>" .
+        "Status: " . $updated['status'] . "<br>";
+
+    if (!empty($updated['city'])) {
+        $bodyMsg .= "Your city: " . $updated['city'] . "<br>";
+    }
+
+    $bodyMsg .= "Save this email so you know your password!";
+
+    $mail->isHTML(true);
+    $mail->Subject = "Your data has been updated!";
+    $mail->Body    = $bodyMsg;
+    $mail->AltBody = strip_tags(str_replace(['<br>', '<br/>', '<br />'], "\n", $bodyMsg));
+
+    if($currentUser['role'] === 'supervisor'){
+        $adminMail = new PHPMailer(true);
+        $adminMail->isSMTP();
+        $adminMail->Host       = $_ENV['MT_HOST'];
+        $adminMail->SMTPAuth   = true;
+        $adminMail->Port       = $_ENV['MT_PORT'];
+        $adminMail->Username   = $_ENV['MT_USERNAME'];
+        $adminMail->Password   = $_ENV['MT_PASSWORD'];
         $adminMail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-
         $adminMail->CharSet = 'UTF-8';
         $adminMail->Encoding = 'base64';
 
-        //Recipients
-        $mail->setFrom('no-reply@updated.com', 'Admin');
-        $mail->addAddress($userEmail);
+        $adminMail->setFrom('no-reply@company.com', 'Supervisor');
+        $adminMail->addAddress('admin@company.com');
 
-        $adminMail->setFrom('no-reply@updated.com', 'Admin');
-        $adminMail->addAddress('admin@vts.rs');
+        $bodyMsgAdmin = "User ID: " . $updated['id_user'] . " data has been updated.<br>" .
+            "Salary: " . $updated['salary'] . "<br>" .
+            "Biography: " . $updated['biography'] . "<br>" .
+            "Status: " . $updated['status'] . "<br>";
 
-        $bodyMsg = "Your new salary:" . $updated['salary'] . "<br>" .
-                   "Your new biography: " . $updated['biography'] . "<br>" .
-                   "Your new password: " . $updated['password_updated'] . "<br>";
-
-        if ($updated['city']  !== '') {
-            $bodyMsg .= "Your city: " . $updated['city'] . "<br>";
+        if (!empty($updated['city'])) {
+            $bodyMsgAdmin .= "City: " . $updated['city'] . "<br>";
         }
 
-        $bodyMsg .= "Save this email so you know your password!";
-
-        $bodyMsgAdmin = "User:" . $updated['id_user'] . " credentials have been updated.<br>" .
-                        "The users new salary:" . $updated['salary'] . "<br>" .
-                        "new biography: " . $updated['biography'] . "<br>";
-
-        if ($updated['city']  !== '') {
-            $bodyMsgAdmin .= "and new city: " . $updated['city'] . "<br>";
-        }
-
-        //Content
-        $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = "Your data has been updated!";
-        $mail->Body    = $bodyMsg;
-        $mail->AltBody = $bodyMsg;
-
-        $mail->send();
-
-        $adminMail->isHTML(true);                                  //Set email format to HTML
-        $adminMail->Subject = "Your data has been updated!";
+        $adminMail->isHTML(true);
+        $adminMail->Subject = "User data updated";
         $adminMail->Body    = $bodyMsgAdmin;
-        $adminMail->AltBody = $bodyMsgAdmin;
-
-        $adminMail->send();
-
-        redirectFn('edit_users', "Sikeres adatmódosítás és e-mail küldés!");
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: $mail->ErrorInfo";
-        echo "Admin message could not be sent. Mailer Error: $adminMail->ErrorInfo";
+        $adminMail->AltBody = strip_tags(str_replace(['<br>', '<br/>', '<br />'], "\n", $bodyMsgAdmin));
     }
-}
 
-if($_SESSION['role'] === 'admin'){
-    $mail = new PHPMailer(true);
+    $mail->send();
+    if ($adminMail) {
+        $adminMail->send();
+    }
 
-    try {
-        $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = $_ENV['MT_HOST'];                       //Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Port       = $_ENV['MT_PORT'];                       //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-        $mail->Username   = $_ENV['MT_USERNAME'];                       //SMTP username
-        $mail->Password   = $_ENV['MT_PASSWORD'];                       //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-
-        $mail->CharSet = 'UTF-8';
-        $mail->Encoding = 'base64';
-
-        //Recipients
-        $mail->setFrom('no-reply@updated.com', 'Admin');
-        $mail->addAddress($userEmail);
-
-        $bodyMsg = "Your new salary:" . $updated['salary'] . "<br>" .
-            "Your new biography: " . $updated['biography'] . "<br>" .
-            "Your new password: " . $updated['password_updated'] . "<br>";
-
-        if ($updated['city']  !== '') {
-            $bodyMsg .= "Your city: " . $updated['city'] . "<br>";
-        }
-
-        $bodyMsg .= "Save this email so you know your password!";
-
-        //Content
-        $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = "Your data has been updated!";
-        $mail->Body    = $bodyMsg;
-        $mail->AltBody = $bodyMsg;
-
-        $mail->send();
-
-        redirectFn('edit_users', "Sikeres adatmódosítás és e-mail küldés!");
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: $mail->ErrorInfo";
+    redirectFn('edit_users', "Sikeres adatmódosítás és e-mail küldés!");
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: $mail->ErrorInfo";
+    if ($adminMail) {
+        echo " Admin message could not be sent. Mailer Error: $adminMail->ErrorInfo";
     }
 }

@@ -3,16 +3,7 @@ session_start();
 include "includes/functions.php";
 require "includes/header.php";
 $pdo = $GLOBALS['pdo'];
-(int)$id = $_SESSION["id_user"];
-$result = checkUserExist($pdo, $id);
-
-if (
-    !$_SESSION["id_user"] ||
-    !$_SESSION["role"] ||
-    !$result
-) {
-    redirectFn('login', 'No invalid credentials!');
-}
+$user = assertAuthenticated($pdo);
 ?>
 <nav class="navbar navbar-expand-lg border border-dark rounded mb-4">
     <div class="container-fluid">

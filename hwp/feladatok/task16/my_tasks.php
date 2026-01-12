@@ -2,14 +2,10 @@
 session_start();
 require 'includes/functions.php';
 $pdo = $GLOBALS["pdo"];
-
-// Ellenőrizzük, hogy be van-e lépve
-if (!isset($_SESSION['id_user'])) {
-    redirectFn('login', 'Please login first!');
-}
+$currentUser = assertAuthenticated($pdo, ['user']);
 
 // Lekérjük a bejelentkezett felhasználó feladatait
-$myTasks = getMyTasks($pdo, $_SESSION['id_user']);
+$myTasks = getMyTasks($pdo, (int)$currentUser['id_user']);
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +29,7 @@ $myTasks = getMyTasks($pdo, $_SESSION['id_user']);
     <table>
         <thead>
         <tr>
+            <th>Project</th>
             <th>Title</th>
             <th>Description</th>
             <th>Date Added</th>
@@ -41,6 +38,7 @@ $myTasks = getMyTasks($pdo, $_SESSION['id_user']);
         <tbody>
         <?php foreach ($myTasks as $task): ?>
             <tr>
+                <td><?= htmlspecialchars($task['project_title'] ?? 'N/A') ?></td>
                 <td><?= htmlspecialchars($task['title']) ?></td>
                 <td><?= htmlspecialchars($task['description']) ?></td>
                 <td><?= htmlspecialchars($task['date_time_added']) ?></td>

@@ -14,8 +14,8 @@ if($pw === "" || $email === ""){
 }
 $result = loginUser($pdo, $email, $pw);
 
-if(!$result){
-    redirectFn('',"Email or password is incorrect!");
+if($result === null){
+    redirectFn('',"Email, password or status is invalid!");
 }
 
 $_SESSION["id_user"] = $result["id_user"];
