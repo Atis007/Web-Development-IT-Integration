@@ -1,0 +1,64 @@
+# ==============================================================
+# MVC3 .htaccess (Apache mod_rewrite) — Detailed Explanation
+# ==============================================================
+#
+# GOAL
+# ----
+# This file implements the "Front Controller" pattern:
+# - If the requested path is a REAL file or directory on disk, Apache serves it directly.
+# - Otherwise, Apache internally routes the request to index.php.
+#
+# Why? Because in an MVC app we want URLs like:
+#   /book/index
+#   /book/show/3
+# to be handled by PHP (Router -> Controller -> Action), even though those paths
+# are not real folders/files inside /public.
+#
+# IMPORTANT
+# ---------
+# This requires Apache's mod_rewrite module to be enabled.
+# Also, AllowOverride must be allowed for this directory (so .htaccess is read).
+# ==============================================================
+
+RewriteEngine On
+# Turns on Apache's rewrite engine (without this, RewriteCond/RewriteRule are ignored).
+
+# --------------------------------------------------------------
+# 1) If the requested file/folder exists, serve it directly
+# --------------------------------------------------------------
+# %{REQUEST_FILENAME} is the physical filesystem path that Apache maps
+# from the requested URL.
+#
+# -f  => true if REQUEST_FILENAME exists and is a regular file
+# -d  => true if REQUEST_FILENAME exists and is a directory (folder)
+#
+# [OR] means: "if the first condition is true OR the second condition is true"
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+
+# If one of the above conditions is true (file OR directory exists),
+# then apply the following rule:
+#
+# Pattern: ^     => matches any URL path (start of string)
+# Substitution: - => do NOT rewrite anything (leave the request as-is)
+# Flag: [L]      => "Last" — stop processing further rewrite rules
+#
+# Result:
+# - Existing files/directories are NOT routed to index.php.
+# - Apache serves them normally.
+RewriteRule ^ - [L]
+
+# --------------------------------------------------------------
+# 2) Otherwise, route everything through the front controller
+# --------------------------------------------------------------
+# If we reached this rule, it means:
+# - The requested URL does NOT map to an existing file or directory.
+#
+# Pattern: ^        => matches any URL path
+# Substitution: index.php => internally serve public/index.php instead
+# Flag: [L]         => stop processing further rules
+#
+# Result:
+# - URLs like /book/index are handled by index.php,
+#   where the PHP router can determine controller/action/params.
+RewriteRule ^ index.php [L]

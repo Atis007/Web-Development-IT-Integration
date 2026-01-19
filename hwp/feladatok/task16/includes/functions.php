@@ -1,10 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use JetBrains\PhpStorm\NoReturn;
-use PDO;
-use PDOException;
-
 require 'config.php';
 
 $GLOBALS['pdo'] = connectToDatabase($dsn, $pdoOptions);
@@ -241,7 +237,7 @@ function assertAuthenticated(PDO $pdo, array $allowedRoles = []): array
  */
 function getUsers(PDO $pdo): array
 {
-    $sql = "SELECT id_user, name, email FROM users WHERE role = 'user' ORDER BY name ASC";
+    $sql = "SELECT id_user, name, email FROM users WHERE role = 'user' ORDER BY name";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll();
