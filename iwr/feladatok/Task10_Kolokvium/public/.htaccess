@@ -1,4 +1,37 @@
-RewriteEngine On    # Turn on the rewriting engine
+# ----------------------------------------------------------------------
+# 1. Átirányító motor bekapcsolása
+# ----------------------------------------------------------------------
+RewriteEngine On
 
-RewriteRule ^api/([a-z_-]*)$ api.php?table=$1 [NC,L]
-RewriteRule .* - [e=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+# ----------------------------------------------------------------------
+# 2. Bázis útvonal beállítása
+# Ez határozza meg, hogy a localhost után melyik alkönyvtárban van a public mappa.
+# ----------------------------------------------------------------------
+RewriteBase /iskola/iwr/feladatok/Task10_Kolokvium/public/
+
+# ----------------------------------------------------------------------
+# 3. Kivételek kezelése (Létező fájlok/mappák)
+# Ha a kérés egy létező fájlra (pl. .css, .js, .png) vagy mappára mutat,
+# akkor azt az Apache szolgálja ki közvetlenül, ne irányítsa át sehova.
+# ----------------------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# ----------------------------------------------------------------------
+# 4. API végpontok átirányítása a gyökérbe (api.php)
+# Ha az URL 'api/'-vel kezdődik (pl. public/api/workers), akkor 
+# a kérést átadja a szülőmappában (../) található api.php-nak.
+# ----------------------------------------------------------------------
+# [QSA] - Query String Append: megtartja a GET paramétereket (?id=1)
+# [NC]  - No Case: kis- és nagybetű nem számít az 'api' szónál
+# [L]   - Last: ha ez illeszkedik, nem futtat tovább több szabályt
+RewriteRule ^api/(.*)$ ../api.php [QSA,NC,L]
+RewriteRule ^api$ ../api.php [QSA,NC,L]
+
+# ----------------------------------------------------------------------
+# 5. Kliens oldali (Frontend) útválasztás
+# Minden egyéb kérést (ami nem fájl és nem API) küldjön a public/index.php-ra.
+# Ez teszi lehetővé, hogy a főoldal és a formok betöltődjenek.
+# ----------------------------------------------------------------------
+RewriteRule ^ index.php [L]

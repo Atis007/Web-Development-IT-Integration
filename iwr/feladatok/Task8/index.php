@@ -49,5 +49,5 @@ if(( ($now - $dbLatestTime) / 60) > 5) {
 
     echo "<p>10 jokes added to the database.</p>";
 }
-echo "<p><a href='jokes.php'>Go to see</a> the then latest joke in the database</p>";
+echo "<p><a href='jokes.php'>Go to see</a> the ten latest joke in the database</p>";
 include_once 'includes/footer.php';
