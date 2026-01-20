@@ -3,6 +3,10 @@
 # ----------------------------------------------------------------------
 RewriteEngine On
 
+# Make sure Authorization header is available in PHP (Bearer token)
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
 # ----------------------------------------------------------------------
 # 2. Bázis útvonal beállítása
 # Ez határozza meg, hogy a localhost után melyik alkönyvtárban van a public mappa.

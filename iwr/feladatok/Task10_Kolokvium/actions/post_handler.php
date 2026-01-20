@@ -49,7 +49,7 @@ try {
     $message = $newWorker['message'] ?? 'Unknown response.';
     $idWorker = $newWorker['id_worker'] ?? null;
 
-    echo "$status . " . $message . " " . $idWorker . "\n";
+    echo $status . " " . $message . " " . $idWorker . "\n";
 } catch (GuzzleException $e) {
     // Részletesebb hibaüzenet a debugoláshoz
     $responseBody = $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : '';
