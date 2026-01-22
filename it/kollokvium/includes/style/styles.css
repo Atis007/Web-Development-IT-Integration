@@ -6,22 +6,43 @@ body {
     color: #555;
 }
 
-/* Layout beállítások */
-header, nav, main {
-    background-color: white;
+/* Minden fő elemnek fix szélességet adunk és középre igazítjuk őket */
+header, nav, main, footer, .green-line, .bottom-white-bar {
     max-width: 980px;
     margin: 0 auto;
+    display: block; /* Biztos ami biztos */
+}
+
+header, nav, main {
+    background-color: white;
+}
+
+.green-line {
+    background-color: #7A9E1E;
+    height: 3px;
+    border: none;
+    /* A margin: 0 auto már a fenti csoportos szabályban van */
 }
 
 /* Footer külön, hogy a zöld háttéren legyen a szöveg */
 footer {
-    max-width: 980px;
-    margin: 0 auto;
-    background-color: transparent; /* Átlátszó, hogy a body zöldje látszódjon */
+    background-color: transparent;
     padding: 20px 0;
     text-align: center;
     color: #555;
     font-size: 12px;
+}
+
+.div-bottom-border {
+    border-bottom-style: solid;
+    border-bottom-color: #7A9E1E;
+}
+
+.bottom-white-bar {
+    background-color: white;
+    height: 25px; /* A kép alapján kb ekkora */
+    width: 100%;
+    margin-bottom: 20px; /* Hogy ne tapadjon a böngésző aljára, ha nem szeretnéd */
 }
 
 /* Header specifikus */
@@ -57,7 +78,7 @@ header {
 }
 
 .header-image img {
-    max-height: 120px; /* A virág méretének korlátozása */
+    max-height: 240px; /* A virág méretének korlátozása */
     display: block;
 }
 
@@ -70,7 +91,6 @@ header {
     height: 2px; /* Kicsit vastagabb a képen */
     border: none;
     margin: 0 auto;
-    max-width: 980px;
 }
 
 .main-nav {
@@ -215,7 +235,7 @@ header {
 /* Nagyobb radio gombok */
 .checkbox-group input[type="radio"] {
     margin-right: 10px;
-    transform: scale(1.2); 
+    transform: scale(1.2);
     margin-left: 2px;
 }
 

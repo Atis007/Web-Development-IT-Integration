@@ -1,7 +1,12 @@
 <?php
+require 'includes/config.php';
+$title='HomePage';
 require 'includes/header.php';
+
+if(isset($_GET['error']))
+    echo "<p style='color:red; font-weight: bold'>" . htmlspecialchars($_GET['error']) . "</p>";
 ?>
-<div class="main-content">
+<div class="main-content div-bottom-border">
     <div class="left-section">
         <h1><i>A holistic way to improving your health.</i></h1>
         <h2>Let us show you how Chinese medicine can help you:</h2>
@@ -11,7 +16,11 @@ require 'includes/header.php';
     </div>
     <div class="right-section">
         <h2>Reservation</h2>
-        <form action="" method="post">
+        <?php
+        if(isset($_GET['error']))
+            echo "<p style='color:red; font-weight: bold'>" . htmlspecialchars($_GET['error']) . "</p>";
+        ?>
+        <form action="med.php" method="get">
             <label for="firstname">Full Name *</label>
             <div class="name-inputs">
                 <input type="text" id="firstname" name="firstname" placeholder="First name" required>
@@ -31,9 +40,12 @@ require 'includes/header.php';
             <label for="treatments">Treatments *</label>
             <select id="treatments" name="treatments" required>
                 <option value="">Select Item</option>
-                <option value="acupuncture">Acupuncture</option>
-                <option value="herbs">Chinese Herbs</option>
-                <option value="massage">Massage Therapy</option>
+                <option value="<?= htmlspecialchars($GLOBALS['treatments'][0]) ?>">Acupuncture</option>
+                <option value="<?= htmlspecialchars($GLOBALS['treatments'][1]) ?>">Chinese Herbs</option>
+                <option value="<?= htmlspecialchars($GLOBALS['treatments'][2]) ?>">Nutritional Counseling</option>
+                <option value="<?= htmlspecialchars($GLOBALS['treatments'][3]) ?>">Fertility Counseling </option>
+                <option value="<?= htmlspecialchars($GLOBALS['treatments'][4]) ?>">Massage Therapy</option>
+                <option value="<?= htmlspecialchars($GLOBALS['treatments'][5]) ?>">Cupping</option>
             </select>
 
             <label for="arrival">Arrival Date *</label>
