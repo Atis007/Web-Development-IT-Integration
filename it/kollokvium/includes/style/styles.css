@@ -1,0 +1,238 @@
+body {
+    background-color: #d0e2b0;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #555;
+}
+
+/* Layout beállítások */
+header, nav, main {
+    background-color: white;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+/* Footer külön, hogy a zöld háttéren legyen a szöveg */
+footer {
+    max-width: 980px;
+    margin: 0 auto;
+    background-color: transparent; /* Átlátszó, hogy a body zöldje látszódjon */
+    padding: 20px 0;
+    text-align: center;
+    color: #555;
+    font-size: 12px;
+}
+
+/* Header specifikus */
+header {
+    padding: 0; /* A container intézi a paddingot */
+    overflow: hidden; /* Ha a kép túl nagy lenne */
+}
+
+.container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    height: 120px; /* Fix magasság, hogy a virág ne nyomja szét */
+}
+
+.logo-text-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.site-title p:first-of-type {
+    font-size: 28px;
+    margin: 0;
+    color: #555;
+}
+
+.site-title p:last-of-type {
+    font-size: 13px;
+    margin: 5px 0 0 0;
+    color: #777;
+}
+
+.header-image img {
+    max-height: 120px; /* A virág méretének korlátozása */
+    display: block;
+}
+
+.greenText {
+    color: #7A9E1E;
+}
+
+.green-line {
+    background-color: #7A9E1E;
+    height: 2px; /* Kicsit vastagabb a képen */
+    border: none;
+    margin: 0 auto;
+    max-width: 980px;
+}
+
+.main-nav {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.main-nav li {
+    flex: 1;
+    text-align: center;
+}
+
+.main-nav a {
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+    color: #444;
+    padding: 12px 0;
+    font-size: 14px;
+}
+
+/* Az első elem aktív stílusa a kép alapján */
+.main-nav li:first-child a {
+    background-color: #d0e2b0; /* A body háttérszíne */
+    color: #333;
+}
+
+.main-nav a:hover {
+    background-color: #e8f0d8;
+}
+
+/* Fő tartalom */
+.main-content {
+    display: flex;
+    flex-direction: row;
+    padding: 40px 20px 60px; /* Nagyobb padding a kép alapján */
+    gap: 40px;
+}
+
+.left-section {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.right-section {
+    flex: 0 0 320px; /* A form kicsit keskenyebb fix szélességgel szebb */
+}
+
+/* Bal oldali tipográfia */
+.left-section h1 {
+    color: #7A9E1E;
+    font-size: 26px; /* Nagyobb betűméret */
+    margin: 0 0 30px 0;
+    font-weight: normal;
+    font-style: italic; /* A kép alapján dőlt */
+}
+
+.left-section h2 {
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 25px;
+    font-weight: normal;
+}
+
+.left-section p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.left-section .doctors {
+    margin-top: 40px;
+    color: #666;
+    font-size: 13px;
+}
+
+/* Jobb oldal - Form design */
+.right-section h2 {
+    color: #777; /* Halványabb szürke a "Reservation" felirat */
+    font-size: 18px;
+    margin: 0 0 20px 0;
+    font-weight: normal;
+    border-bottom: none;
+}
+
+.right-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-section label {
+    font-weight: normal;
+    margin: 15px 0 5px; /* Térköz a label felett */
+    color: #666;
+    font-size: 14px;
+}
+
+/* Inputok stílusa - Pixel perfect közelítés */
+.right-section input[type="text"],
+.right-section input[type="date"],
+.right-section select {
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Kerekítés */
+    font-size: 14px;
+    background-color: #f3f3f3; /* Nagyon világos szürke */
+    color: #666;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); /* Pici belső árnyék */
+    height: 38px; /* Egységes magasság */
+    box-sizing: border-box;
+}
+
+.name-inputs {
+    display: flex;
+    gap: 15px;
+}
+
+.name-inputs input {
+    width: 100%; /* Kitölti a rendelkezésre álló helyet */
+}
+
+/* Radio button csoport */
+.checkbox-group {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Nagyobb radio gombok */
+.checkbox-group input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2); 
+    margin-left: 2px;
+}
+
+/* Gomb stílusa */
+.right-section button {
+    background-color: #383838; /* Sötétszürke, majdnem fekete */
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    align-self: flex-end; /* Jobbra igazítás */
+}
+
+.right-section button:hover {
+    background-color: #000;
+}
