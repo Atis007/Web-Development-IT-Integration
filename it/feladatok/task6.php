@@ -1,5 +1,7 @@
 <?php
 $title = "Task6";
+$metaDescription = "Táblázat és beágyazott iframe példa, külső link célzott megnyitással.";
+$metaRobots = "index, follow";
 include 'includes/header.php';
 ?>
 <table border="1">

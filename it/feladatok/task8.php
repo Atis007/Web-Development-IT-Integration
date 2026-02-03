@@ -1,5 +1,7 @@
 <?php
 $title = "Meta tags, iframe and semantic tags";
+$metaDescription = "Szemantikus HTML, meta tagek bemutatása és beágyazott videó példa.";
+$metaRobots = "index, follow";
 include 'includes/header.php';
 ?>
 <header>

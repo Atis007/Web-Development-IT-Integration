@@ -1,5 +1,7 @@
 <?php
 $title = "Dog Breeds";
+$metaDescription = "Kutyafajták témájú oldal képekkel, definíciós listával és navigációval.";
+$metaRobots = "index, follow";
 include 'includes/header.php';
 ?>
 <ul>

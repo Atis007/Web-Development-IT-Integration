@@ -1,5 +1,7 @@
 <?php
 $title = "Task11";
+$metaDescription = "Táblázatos elrendezés lista, űrlap és beágyazott videó példával.";
+$metaRobots = "index, follow";
 include 'includes/header.php';
 ?>
 

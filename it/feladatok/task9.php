@@ -1,5 +1,7 @@
 <?php
 $title = "Task9";
+$metaDescription = "Űrlap példák: GET és POST, fájlfeltöltés és visszajelzés mező.";
+$metaRobots = "index, follow";
 include 'includes/header.php';
 ?>
 <style>

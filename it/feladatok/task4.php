@@ -1,5 +1,7 @@
 <?php
 $title = "Example - Dog Breed";
+$metaDescription = "Kutyafajta felismerős feladat képpel, listával és elérhetőségi linkekkel.";
+$metaRobots = "index, follow";
 include 'includes/header.php';
 ?>
 <a href="https://www.vts.su.ac.rs">www.vts.su.ac.rs</a>

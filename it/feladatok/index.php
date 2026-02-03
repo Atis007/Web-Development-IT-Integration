@@ -1,5 +1,7 @@
 <?php
 $title = "React bemutatás";
+$metaDescription = "A React bemutatása: rövid történet, főbb jellemzők és alkalmazási területek.";
+$metaRobots = "index, follow";
 include 'includes/header.php';
 ?>
 <h1><mark>React</mark> – A modern webfejlesztés alapköve</h1>

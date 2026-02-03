@@ -1,5 +1,7 @@
 <?php
 $title = "Task7";
+$metaDescription = "Bemutatkozó oldal képpel, személyes adatokkal és kedvenc hivatkozásokkal.";
+$metaRobots = "index, follow";
 include 'includes/header.php';
 ?>
 <table border="1">

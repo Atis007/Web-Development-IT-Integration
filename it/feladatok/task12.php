@@ -1,5 +1,7 @@
 <?php
 $title = "Task12";
+$metaDescription = "Szövegformázási példák CSS-sel, több bekezdésen keresztül.";
+$metaRobots = "index, follow";
 include "includes/header.php";
 ?>
 <div class="container">

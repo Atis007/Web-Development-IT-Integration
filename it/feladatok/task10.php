@@ -1,5 +1,7 @@
 <?php
 $title = "Task10";
+$metaDescription = "Űrlap csoportosítással és legördülő listával, optgroup használatával.";
+$metaRobots = "index, follow";
 include 'includes/header.php';
 ?>
 <style>

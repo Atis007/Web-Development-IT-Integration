@@ -1,5 +1,7 @@
 <?php
 $title = "HTML tag examples";
+$metaDescription = "HTML tagek rövid ismertetése és példák listákkal, linkekkel és formázással.";
+$metaRobots = "index, follow";
 include 'includes/header.php';
 ?>
 <h1>HTML tag examples</h1>

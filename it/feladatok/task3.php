@@ -1,5 +1,7 @@
 <?php
 $title = "Example";
+$metaDescription = "HTML példák: felső index, alsó index, rövidítések és kódrészlet bemutatása.";
+$metaRobots = "index, follow";
 include 'includes/header.php';
 ?>
 <div class="card" id="top"><p>Useless code <del>(function useless(){})</del> have been removed in newer version.</p>
