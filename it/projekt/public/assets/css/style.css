@@ -1,0 +1,468 @@
+/* ===== Google Font ===== */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* ===== Clean, Minimal Theme ===== */
+:root {
+  --ink: #1f2937;
+  --ink-muted: #6b7280;
+  --paper: #f1efe9;
+  --surface: #ffffff;
+  --line: #e6e6e3;
+  --cta: #2f3a4f;
+  --cta-hover: #1f2736;
+
+  --font-xs: clamp(0.75rem, 1vw, 0.85rem);
+  --font-sm: clamp(0.85rem, 1vw, 0.95rem);
+  --font-md: clamp(1rem, 1vw, 1.05rem);
+  --font-lg: clamp(1.25rem, 2vw, 1.4rem);
+  --font-xl: clamp(1.75rem, 3vw, 2rem);
+  --font-2xl: clamp(2.25rem, 4vw, 2.8rem);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.65;
+  padding: 24px;
+  font-size: calc(var(--font-md) * 1.08);
+}
+
+/* ===== Layout ===== */
+.container {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.site-header {
+  margin-bottom: 18px;
+}
+
+.site-footer {
+  margin-top: auto;
+  padding: 16px 0;
+  color: var(--ink-muted);
+  font-size: var(--font-sm);
+  text-align: center;
+}
+
+/* ===== Navigation ===== */
+nav {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nav-left,
+.nav-right {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 8px;
+  line-height: 1.2;
+}
+
+nav a:hover {
+  background: #f1f2ef;
+}
+
+/* ===== Cards ===== */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  margin-bottom: 18px;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+  display: block;
+}
+
+/* ===== Typography ===== */
+h1 {
+  font-size: var(--font-2xl);
+  font-weight: 700;
+  margin-bottom: 0.4em;
+}
+h2 {
+  font-size: var(--font-xl);
+  font-weight: 600;
+  margin-bottom: 0.35em;
+}
+h3 {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: 0.3em;
+}
+p {
+  margin-bottom: 0.8em;
+  color: var(--ink);
+}
+small {
+  color: var(--ink-muted);
+  font-size: var(--font-xs);
+}
+
+ul {
+  padding-left: 18px;
+  margin-bottom: 0.8em;
+}
+li {
+  margin-bottom: 0.35em;
+}
+
+/* ===== Links & Buttons ===== */
+a {
+  color: var(--ink);
+}
+
+.btn,
+button {
+  background: var(--cta);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn:hover,
+button:hover {
+  background: var(--cta-hover);
+}
+
+/* ===== Forms ===== */
+input,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font-size: var(--font-md);
+}
+
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background-color: #fff;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%),
+    linear-gradient(135deg, var(--ink) 50%, transparent 50%),
+    linear-gradient(to right, #f7f7f2, #f7f7f2);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%, 100% 0;
+  background-size: 6px 6px, 6px 6px, 2.4em 100%;
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font-size: var(--font-md);
+  cursor: pointer;
+  appearance: none;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid #d3d7df;
+  border-color: #d3d7df;
+}
+
+select:focus {
+  outline: 2px solid #d3d7df;
+  border-color: #d3d7df;
+}
+
+select:hover {
+  border-color: #cdd2db;
+}
+
+/* ===== Tables (if used) ===== */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td,
+table th {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+}
+
+/* Accordion */
+.accordion {
+  background: var(--cta);
+  color: #fff;
+  cursor: pointer;
+  padding: 18px 20px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  border-radius: 10px;
+  margin: 8px auto 6px auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.accordion:hover,
+.accordion:focus-within {
+  background: var(--cta-hover);
+}
+
+.accordion button {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border: 0;
+  line-height: 1.2;
+}
+
+.accordion button:hover,
+.accordion button:focus {
+  background: transparent;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+  padding: 18px 20px;
+  background-color: var(--surface);
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin: 0 auto 10px auto;
+}
+
+.accordion-wrap {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.product-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.product-item:last-child {
+  border-bottom: none;
+}
+
+.product-info {
+  flex: 1;
+}
+
+.product-item input[type="checkbox"] {
+  width: auto;
+  margin-left: auto;
+  margin-top: 6px;
+}
+
+.resetBtn {
+  color: var(--ink);
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.order-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-direction: row-reverse;
+
+  width: fit-content;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+.order-details {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.order-details > div:first-child {
+  flex: 0 1 60%;
+}
+
+.order-details > div:last-child {
+  flex: 0 1 40%;
+  text-align: right;
+}
+
+.error-message {
+  background-color: #ffe5e5;
+  color: #b20000;
+  border: 1px solid #b20000;
+  padding: 9px 9px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+/* ===== Login Form Styles ===== */
+.login-wrap {
+  /* Opcionális: Ha azt akarod, hogy maga a fehér kártya is kisebb legyen */
+  max-width: 450px;
+  margin: 40px auto;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: var(--font-sm);
+  color: var(--ink-muted);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* Ez tolja jobbra a gombot */
+  margin-top: 10px;
+}
+
+.login-btn {
+  width: auto;
+  padding: 8px 24px;
+}
+
+/* ===== Admin Pages ===== */
+.admin-page h1 {
+  margin-bottom: 10px;
+}
+
+.admin-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.admin-table-wrap {
+  max-height: 360px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-table thead th {
+  background: #f7f7f2;
+  text-align: left;
+  position: sticky;
+  top: 0;
+}
+
+.admin-table-right {
+  text-align: right;
+}
+
+.success-message {
+  background-color: #e8f7ee;
+  color: #1f5e3b;
+  border: 1px solid #1f5e3b;
+  padding: 9px 9px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  body {
+    padding: 16px;
+  }
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .nav-left,
+  .nav-right {
+    gap: 6px;
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+}

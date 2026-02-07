@@ -19,7 +19,7 @@ switch ($treatment) {
         $price=4200;
         break;
     default:
-        header('Location:index.php?error=Not a valid treatment.');
+        header('Location:home.php?error=Not a valid treatment.');
         exit;
 }
 

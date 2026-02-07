@@ -2,7 +2,7 @@
 $title = "React bemutatás";
 $metaDescription = "A React bemutatása: rövid történet, főbb jellemzők és alkalmazási területek.";
 $metaRobots = "index, follow";
-include 'includes/header.php';
+include (is_dir('feladatok') ? 'feladatok/' : '') . 'includes/header.php';
 ?>
 <h1><mark>React</mark> – A modern webfejlesztés alapköve</h1>
 <div class="card">
@@ -69,4 +69,4 @@ include 'includes/header.php';
     <a href="mailto:tothattila5559@gmail.com">Email</a><br>
     <a href="https://github.com/Atis007" target="_blank">GitHub oldal</a>
 </address>
-<?php include 'includes/footer.php'; ?>
+<?php include (is_dir('feladatok') ? 'feladatok/' : '') . 'includes/footer.php'; ?>

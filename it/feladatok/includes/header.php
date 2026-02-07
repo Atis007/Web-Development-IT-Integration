@@ -1,5 +1,13 @@
 <?php
-$basePath = $basePath ?? '/iskola/it/feladatok/';
+$rootBase = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/') . '/';
+$inFeladatok = strpos($_SERVER['SCRIPT_NAME'], '/feladatok/') !== false;
+if ($inFeladatok) {
+    $rootBase = preg_replace('#/feladatok/?$#', '/', $rootBase);
+}
+$feladatokBase = $rootBase . 'feladatok/';
+
+$cssPath = $feladatokBase . 'includes/style.css';
+$projektPath = $rootBase . 'projekt/public/';
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,9 +20,9 @@ $basePath = $basePath ?? '/iskola/it/feladatok/';
     <meta name="description" content="<?php echo isset($metaDescription) ? $metaDescription : 'Saját honlap - webes bemutató és feladatok gyűjteménye.'; ?>">
     <meta name="robots" content="<?php echo isset($metaRobots) ? $metaRobots : 'index, follow'; ?>">
     <title><?php echo isset($title) ? $title : "Exercise Page"; ?></title>
-    <link rel="stylesheet" href="<?php echo $basePath; ?>includes/style.css">
+    <link rel="stylesheet" href="<?php echo $cssPath; ?>">
 </head>
 <body>
 <header>
-    <?php include __DIR__ . '/navbar.php'; ?>
+    <?php include dirname(__FILE__) . '/navbar.php'; ?>
 </header>
