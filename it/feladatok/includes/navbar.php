@@ -1,8 +1,14 @@
-<nav>
-    <ul>
+<nav class="site-nav">
+    <input type="checkbox" id="feladatok-nav-toggle" class="nav-toggle">
+    <label class="nav-toggle-label" for="feladatok-nav-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+    <ul class="nav-links">
         <li>
             <a href="<?php echo $rootBase; ?>index.php" class="<?php if ($title === 'React bemutatás') echo 'active'; ?>">Home<span class="underline left"></span></a>
-            <a href="<?php echo $projektPath; ?>/" class="<?php if ($title === 'Projekt') echo 'active'; ?>">Projekt<span class="underline left"></span></a>
+            <a href="<?php echo $projektPath; ?>" class="<?php if ($title === 'Projekt') echo 'active'; ?>">Projekt<span class="underline left"></span></a>
             <a href="<?php echo $feladatokBase; ?>task2.php" class="<?php if ($title === 'HTML tag examples') echo 'active'; ?>">Task2<span class="underline left"></span></a>
             <a href="<?php echo $feladatokBase; ?>task3.php" class="<?php if ($title === 'Example') echo 'active'; ?>">Task3<span class="underline left"></span></a>
             <a href="<?php echo $feladatokBase; ?>task4.php" class="<?php if ($title === 'Example - Dog Breed') echo 'active'; ?>">Task4<span class="underline left"></span></a>

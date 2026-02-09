@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 require __DIR__ . '/../../config/config.php';
@@ -9,112 +10,32 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (empty($_SESSION['logged_in']) || ($_SESSION['role'] ?? '') !== 'admin') {
-    header('Location: ' . BASE_URL);
-    exit;
+	header('Location: ' . BASE_URL);
+	exit;
 }
 
 $title = 'Products Admin';
 $metaDescription = 'Manage products.';
 require PROJECT_ROOT . '/templates/header.php';
 
-require './actions/product_actions.php';
-
-$statusMessage = '';
-$statusType = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$action = $_POST['action'] ?? '';
-
-	if ($action === 'create') {
-		$name = trim($_POST['name'] ?? '');
-		$description = trim($_POST['description'] ?? '');
-		$price = filter_var($_POST['price'] ?? null, FILTER_VALIDATE_INT);
-		$categoryId = filter_var($_POST['category_id'] ?? null, FILTER_VALIDATE_INT);
-
-		if ($name === '' || $price === false || $categoryId === false) {
-			$statusMessage = 'Name, category, and price are required.';
-			$statusType = 'error';
-		} else {
-			$sql = "INSERT INTO products (category_id, name, description, price) VALUES (:category_id, :name, :description, :price)";
-			$stmt = $pdo->prepare($sql);
-			$stmt->execute([
-				':category_id' => $categoryId,
-				':name' => $name,
-				':description' => $description !== '' ? $description : null,
-				':price' => $price,
-			]);
-			$statusMessage = 'Product created.';
-			$statusType = 'success';
-		}
-	}
-
-	if ($action === 'update') {
-		$productId = filter_var($_POST['product_id'] ?? null, FILTER_VALIDATE_INT);
-		$name = trim($_POST['name'] ?? '');
-		$description = trim($_POST['description'] ?? '');
-		$price = filter_var($_POST['price'] ?? null, FILTER_VALIDATE_INT);
-		$categoryId = filter_var($_POST['category_id'] ?? null, FILTER_VALIDATE_INT);
-
-		if ($productId === false || $name === '' || $price === false || $categoryId === false) {
-			$statusMessage = 'Product, name, category, and price are required.';
-			$statusType = 'error';
-		} else {
-			$sql = "UPDATE products SET category_id = :category_id, name = :name, description = :description, price = :price WHERE id = :id";
-			$stmt = $pdo->prepare($sql);
-			$stmt->execute([
-				':category_id' => $categoryId,
-				':name' => $name,
-				':description' => $description !== '' ? $description : null,
-				':price' => $price,
-				':id' => $productId,
-			]);
-			$statusMessage = 'Product updated.';
-			$statusType = 'success';
-		}
-	}
-
-	if ($action === 'delete') {
-		$productId = filter_var($_POST['product_id'] ?? null, FILTER_VALIDATE_INT);
-
-		if ($productId === false) {
-			$statusMessage = 'Product is required.';
-			$statusType = 'error';
-		} else {
-			$sql = "DELETE FROM products WHERE id = :id";
-			$stmt = $pdo->prepare($sql);
-			$stmt->execute([':id' => $productId]);
-			$statusMessage = 'Product deleted.';
-			$statusType = 'success';
-		}
-	}
-}
-
-$categoriesStmt = $pdo->query("SELECT id, name FROM categories ORDER BY name");
-$categories = $categoriesStmt->fetchAll();
-
-$productsStmt = $pdo->query(
-	"SELECT p.id, p.name, p.description, p.price, c.name AS category_name, p.category_id
-	 FROM products p
-	 JOIN categories c ON c.id = p.category_id
-	 ORDER BY p.name"
-);
-$products = $productsStmt->fetchAll();
+$categories = getCategories($pdo);
+$products = getAllProductsWithCategory($pdo);
+$actionUrl = BASE_URL . 'admin/check-product';
 ?>
 
 <main class="container admin-page">
-	<h1>Products</h1>
-
-	<?php if ($statusMessage !== ''): ?>
-		<p class="<?php echo $statusType === 'error' ? 'error-message' : 'success-message'; ?>">
-			<?php echo htmlspecialchars($statusMessage); ?>
-		</p>
+	<?php if (isset($_GET['error'])): ?>
+		<p class="error-message"><?php echo htmlspecialchars($_GET['error']); ?></p>
 	<?php endif; ?>
-
+	<?php if (isset($_GET['success'])): ?>
+		<p class="success-message"><?php echo htmlspecialchars($_GET['success']); ?></p>
+	<?php endif; ?>
+	<h1>Products</h1>
 	<div class="admin-grid">
 		<section class="card">
 			<h2>Create</h2>
-			<form method="post">
-				<input type="hidden" name="action" value="create">
+			<form method="post" action="<?php echo htmlspecialchars($actionUrl); ?>">
+				<input type="hidden" name="action" value="<?php echo ACTIONS[0]; ?>">
 				<p>
 					<label for="create-name">Name</label><br>
 					<input type="text" id="create-name" name="name" required>
@@ -170,14 +91,19 @@ $products = $productsStmt->fetchAll();
 
 		<section class="card">
 			<h2>Update</h2>
-			<form method="post">
-				<input type="hidden" name="action" value="update">
+			<form method="post" action="<?php echo htmlspecialchars($actionUrl); ?>">
+				<input type="hidden" name="action" value="<?php echo ACTIONS[1]; ?>">
 				<p>
 					<label for="update-product">Product</label><br>
 					<select id="update-product" name="product_id" required>
 						<option value="">Select product</option>
 						<?php foreach ($products as $product): ?>
-							<option value="<?php echo (int)$product['id']; ?>">
+							<option
+								value="<?php echo (int)$product['id']; ?>"
+								data-name="<?php echo htmlspecialchars($product['name']); ?>"
+								data-category="<?php echo (int)$product['category_id']; ?>"
+								data-description="<?php echo htmlspecialchars($product['description'] ?? ''); ?>"
+								data-price="<?php echo htmlspecialchars((string)$product['price']); ?>">
 								<?php echo htmlspecialchars($product['name']); ?>
 							</option>
 						<?php endforeach; ?>
@@ -212,8 +138,8 @@ $products = $productsStmt->fetchAll();
 
 		<section class="card">
 			<h2>Delete</h2>
-			<form method="post" onsubmit="return confirm('Delete this product?');">
-				<input type="hidden" name="action" value="delete">
+			<form method="post" action="<?php echo htmlspecialchars($actionUrl); ?>" onsubmit="return confirm('Delete this product?');">
+				<input type="hidden" name="action" value="<?php echo ACTIONS[2]; ?>">
 				<p>
 					<label for="delete-product">Product</label><br>
 					<select id="delete-product" name="product_id" required>
@@ -232,3 +158,31 @@ $products = $productsStmt->fetchAll();
 </main>
 
 <?php include PROJECT_ROOT . '/templates/footer.php'; ?>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const productSelect = document.getElementById('update-product');
+		const nameInput = document.getElementById('update-name');
+		const categorySelect = document.getElementById('update-category');
+		const descriptionInput = document.getElementById('update-description');
+		const priceInput = document.getElementById('update-price');
+
+		if (!productSelect) return;
+
+		productSelect.addEventListener('change', () => {
+			const opt = productSelect.selectedOptions[0];
+			if (!opt || !opt.value) {
+				nameInput.value = '';
+				categorySelect.value = '';
+				descriptionInput.value = '';
+				priceInput.value = '';
+				return;
+			}
+
+			nameInput.value = opt.dataset.name || '';
+			categorySelect.value = opt.dataset.category || '';
+			descriptionInput.value = opt.dataset.description || '';
+			priceInput.value = opt.dataset.price || '';
+		});
+	});
+</script>

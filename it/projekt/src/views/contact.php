@@ -2,6 +2,9 @@
 $title = 'Contact Us';
 $metaDescription = 'Get in touch with our food ordering team for support or questions.';
 require PROJECT_ROOT . '/templates/header.php';
+
+$errorMsg = $_GET['contactError'] ?? '';
+$successMsg = $_GET['success'] ?? '';
 ?>
 
 <main class="container">
@@ -14,21 +17,32 @@ require PROJECT_ROOT . '/templates/header.php';
 			<strong>Hours:</strong> Mon–Sat, 10:00–21:00
 		</p>
 	</section>
-
+	
 	<section class="card">
 		<h2>Send Us a Message</h2>
-		<form action="#" method="post">
+		<?php if ($errorMsg): ?>
+			<div class="error-message">
+				<?php echo htmlspecialchars($errorMsg); ?>
+			</div>
+		<?php endif; ?>
+	
+		<?php if ($successMsg): ?>
+			<div class="success-message">
+				<?php echo htmlspecialchars($successMsg); ?>
+			</div>
+		<?php endif; ?>
+		<form action="<?php echo htmlspecialchars(BASE_URL); ?>check_contact" method="post">
 			<p>
 				<label for="name">Name</label><br>
-				<input type="text" id="name" name="name" required>
+				<input type="text" id="name" name="name">
 			</p>
 			<p>
 				<label for="email">Email</label><br>
-				<input type="email" id="email" name="email" required>
+				<input type="email" id="email" name="email">
 			</p>
 			<p>
 				<label for="message">Message</label><br>
-				<textarea id="message" name="message" rows="5" required></textarea>
+				<textarea id="message" name="message" rows="5"></textarea>
 			</p>
 			<button type="submit">Send Message</button>
 		</form>

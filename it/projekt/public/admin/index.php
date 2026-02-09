@@ -13,5 +13,5 @@ if (empty($_SESSION['logged_in']) || ($_SESSION['role'] ?? '') !== 'admin') {
     exit;
 }
 
-header('Location: ' . BASE_URL . 'admin/orders/orders.php');
+header('Location: ' . BASE_URL . 'admin/orders');
 exit;

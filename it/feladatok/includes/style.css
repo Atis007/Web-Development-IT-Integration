@@ -45,6 +45,48 @@ nav {
     padding: 0.75rem 0.75rem;
 }
 
+.site-nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.nav-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+}
+
+.nav-toggle-label {
+    display: none;
+    width: 40px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1px solid rgba(30, 41, 59, 0.25);
+    background: rgba(255, 255, 255, 0.85);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.nav-toggle-label span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
 nav .navbar-brand {
     color: var(--text);
     font-size: var(--font-md);
@@ -63,15 +105,23 @@ nav ul {
     margin: 0;
 }
 
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+}
+
+.nav-links li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+}
+
 li {
     font-size: var(--font-md);
 }
 
 nav li a{
-    margin-right: 1rem;
-}
-
-nav li a:last-child{
     margin-right: 0;
 }
 
@@ -191,12 +241,41 @@ footer {
 }
 
 /* ===== Media Queries ===== */
+@media (max-width: 1024px) {
+    body { padding: 18px; }
+}
+
 @media (max-width: 768px) {
     body { padding: 15px; }
     nav { padding: 0.5rem; }
-    nav ul {flex-direction: column; gap: 0.5rem;}
 }
 
-@media (max-width: 480px) {
-    body { padding: 10px; }
+@media (max-width: 640px) {
+    body { padding: 12px; }
+
+    .nav-toggle-label {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        width: 100%;
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(30, 41, 59, 0.12);
+    }
+
+    .nav-toggle:checked + .nav-toggle-label + .nav-links {
+        display: flex;
+    }
+
+    .nav-links li {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    nav li a {
+        width: 100%;
+        padding: 0.25rem 0;
+    }
 }

@@ -66,6 +66,35 @@ nav {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 8px 12px;
+  position: relative;
+}
+
+.nav-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-toggle-label {
+  display: none;
+  width: 42px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.nav-toggle-label span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--ink);
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .nav-inner {
@@ -352,9 +381,18 @@ table th {
   border-radius: 8px;
   margin-bottom: 12px;
 }
+
+.success-message {
+  background-color: #e7f7ed;
+  color: #1c6b37;
+  border: 1px solid #1c6b37;
+  padding: 9px 9px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
 /* ===== Login Form Styles ===== */
 .login-wrap {
-  /* Opcionális: Ha azt akarod, hogy maga a fehér kártya is kisebb legyen */
+
   max-width: 450px;
   margin: 40px auto;
 }
@@ -380,7 +418,7 @@ table th {
 
 .form-actions {
   display: flex;
-  justify-content: flex-end; /* Ez tolja jobbra a gombot */
+  justify-content: flex-end; /* Pushes the button to the right */
   margin-top: 10px;
 }
 
@@ -437,17 +475,13 @@ table th {
   text-align: right;
 }
 
-.success-message {
-  background-color: #e8f7ee;
-  color: #1f5e3b;
-  border: 1px solid #1f5e3b;
-  padding: 9px 9px;
-  border-radius: 8px;
-  margin-bottom: 12px;
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  body {
+    padding: 20px;
+  }
 }
 
-
-/* ===== Responsive ===== */
 @media (max-width: 768px) {
   body {
     padding: 16px;
@@ -464,5 +498,35 @@ table th {
 
   .admin-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-toggle-label {
+    display: flex;
+  }
+
+  .nav-inner {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 10px;
+    padding-top: 8px;
+  }
+
+  .nav-toggle:checked + .nav-toggle-label + .nav-inner {
+    display: flex;
+  }
+
+  .nav-left,
+  .nav-right {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  nav a {
+    width: 100%;
   }
 }

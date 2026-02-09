@@ -35,3 +35,19 @@ $formattedTotal = number_format($totalPrice, 2);
         </section>
     </section>
 </div>
+
+<script>
+    const helper = <?php echo json_encode($validItems); ?>;
+    const totalPrice = <?php echo json_encode($totalPrice); ?>;
+    const filteredItems = helper.map(item => {
+        return {
+            name: item.name,
+            quantity: item.quantity,
+        };
+    });
+
+    const orderData = {
+        items: filteredItems,
+        totalPrice: totalPrice
+    };
+</script>

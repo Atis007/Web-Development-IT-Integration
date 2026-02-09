@@ -19,7 +19,7 @@ include 'includes/header.php';
     </tr>
 </table>
 
-<iframe src="index.php" width="400" height="200" name="myFrame">
+<iframe src="../index.php" width="400" height="200" name="myFrame">
 </iframe>
 
 <p><a href="https://www.vts.su.ac.rs" target="myFrame">VTŠ Subotica</a></p>

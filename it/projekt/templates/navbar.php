@@ -2,6 +2,12 @@
 $isLoggedIn = !empty($_SESSION['user']) || !empty($_SESSION['logged_in']);
 ?>
 <nav class="nav">
+    <input type="checkbox" id="project-nav-toggle" class="nav-toggle">
+    <label class="nav-toggle-label" for="project-nav-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
     <div class="nav-inner">
         <ul class="nav-left">
             <li><a href="<?php echo BASE_URL; ?>">Home</a></li>

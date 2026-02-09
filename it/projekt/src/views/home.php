@@ -1,12 +1,13 @@
 <?php
 $title = "Home";
-$metaDescription = "A php projekt kezdőoldala";
+$metaDescription = "PHP project home page";
 $metaRobots = "index, follow";
 require PROJECT_ROOT . '/templates/header.php';
 
 $randomMessage = returnRandomMessage();
 $greeting = $randomMessage['greeting'];
 $message = $randomMessage['message'];
+
 
 if (isset($_GET['success'])) {
     $punctuationMark = mb_substr($greeting, -1);

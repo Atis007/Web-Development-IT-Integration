@@ -103,12 +103,38 @@ function getProducts(PDO $pdo, int $id): array
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getAllProductsWithCategory(PDO $pdo): array
+{
+    $productsStmt = $pdo->query(
+        "SELECT p.id, p.name, p.description, p.price, c.name AS category_name, p.category_id
+	 FROM products p
+	 JOIN categories c ON c.id = p.category_id
+	 ORDER BY c.name, p.name"
+    );
+    return $productsStmt->fetchAll();
+}
+
 function redirectFn(string $messageType, string $message, string $routeName = 'home'): never
 {
     if ($routeName === 'index') $routeName = '';
 
     header('Location: ' . BASE_URL . $routeName . '?' . $messageType . '=' . urlencode($message));
     exit;
+}
+
+function logEvent(PDO $pdo, string $eventType, string $description): void
+{
+    try {
+        $stmt = $pdo->prepare(
+            "INSERT INTO system_logs (event_type, description) VALUES (:event_type, :description)"
+        );
+        $stmt->execute([
+            ':event_type' => $eventType,
+            ':description' => $description,
+        ]);
+    } catch (PDOException $e) {
+        // Logging should never block the main flow.
+    }
 }
 
 function loginUser(PDO $pdo, string $email, string $password): ?array
@@ -134,7 +160,8 @@ function loginUser(PDO $pdo, string $email, string $password): ?array
     return null;
 }
 
-function registerUser(PDO $pdo, string $email, string $password, string $fullName): false|int{
+function registerUser(PDO $pdo, string $email, string $password, string $fullName): false|int
+{
     $sql = "INSERT INTO users (email, password, fullname) VALUES (:email, :password, :fullName)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -144,7 +171,7 @@ function registerUser(PDO $pdo, string $email, string $password, string $fullNam
     ]);
 
     $id = $pdo->lastInsertId();
-    if(is_numeric($id)) {
+    if (is_numeric($id)) {
         return (int)$id;
     }
 
@@ -171,4 +198,118 @@ function countRevenueBetween(PDO $pdo, DateTimeImmutable $start, DateTimeImmutab
         ':end' => $end->format('Y-m-d H:i:s'),
     ]);
     return array_sum($stmt->fetchAll(PDO::FETCH_COLUMN, 0));
+}
+
+function createOrder(PDO $pdo, int $userId, array $items, int $totalPrice): int
+{
+    $details = '';
+    foreach ($items as $item) {
+        $details .= $item['name'] . ' x' . $item['quantity'] . "\n";
+    }
+
+    $sql = "INSERT INTO orders (user_id, order_details, total) VALUES (:uid, :details, :price)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':uid' => $userId,
+        ':details' => $details,
+        ':price' => $totalPrice,
+    ]);
+
+    return (int)$pdo->lastInsertId();
+}
+
+function createNewProduct(PDO $pdo, int $categoryId, string $name, string $description, int $price): array
+{
+    $sql = "INSERT INTO products (category_id, name, description, price) VALUES (:category_id, :name, :description, :price)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':category_id' => $categoryId,
+        ':name' => $name,
+        ':description' => $description,
+        ':price' => $price,
+    ]);
+
+    if ($pdo->lastInsertId()) {
+        $status = [
+            'statusMessage' => 'Product created.',
+            'statusType' => 'success'
+        ];
+    } else {
+        $status = [
+            'statusMessage' => 'Product creation failed.',
+            'statusType' => 'error'
+        ];
+    }
+
+    return $status;
+}
+
+function updateProduct(PDO $pdo, int $productId, int $categoryId, string $name, string $description, int $price): array
+{
+    $sql = "UPDATE products SET category_id = :category_id, name = :name, description = :description, price = :price WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':category_id' => $categoryId,
+        ':name' => $name,
+        ':description' => $description,
+        ':price' => $price,
+        ':id' => $productId,
+    ]);
+
+    if ($stmt->rowCount() > 0) {
+        return [
+            'statusMessage' => 'Product updated.',
+            'statusType' => 'success'
+        ];
+    } else {
+        return [
+            'statusMessage' => 'No changes made or product not found.',
+            'statusType' => 'error'
+        ];
+    }
+}
+
+function deleteProduct(PDO $pdo, int $productId): array
+{
+    $sql = "DELETE FROM products WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $productId]);
+
+    if ($stmt->rowCount() > 0) {
+        return [
+            'statusMessage' => 'Product deleted.',
+            'statusType' => 'success'
+        ];
+    } else {
+        return [
+            'statusMessage' => 'Product not found or already deleted.',
+            'statusType' => 'error'
+        ];
+    }
+}
+
+function insertMessage(PDO $pdo, string $name, string $email, string $message): array
+{
+    $sql = "INSERT INTO contact_messages (name, email, message) VALUES (:name, :email, :message)";
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->execute([
+        ':name' => $name,
+        ':email' => $email,
+        ':message' => $message
+    ]);
+
+    if ($pdo->lastInsertId()) {
+        $status = [
+            'statusMessage' => 'Message sent successfully.',
+            'statusType' => 'success'
+        ];
+    } else {
+        $status = [
+            'statusMessage' => 'Message sending failed.',
+            'statusType' => 'contactError'
+        ];
+    }
+
+    return $status;
 }

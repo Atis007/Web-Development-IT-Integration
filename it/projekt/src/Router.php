@@ -49,6 +49,5 @@ class Router {
         // If none found: 404
         http_response_code(404);
         echo "404 - Page not found: " . htmlspecialchars($path);
-        // Itt betölthetsz egy 404.php-t is ha akarsz
     }
 }
