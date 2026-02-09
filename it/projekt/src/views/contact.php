@@ -17,7 +17,7 @@ $successMsg = $_GET['success'] ?? '';
 			<strong>Hours:</strong> Mon–Sat, 10:00–21:00
 		</p>
 	</section>
-	
+
 	<section class="card">
 		<h2>Send Us a Message</h2>
 		<?php if ($errorMsg): ?>
@@ -25,7 +25,7 @@ $successMsg = $_GET['success'] ?? '';
 				<?php echo htmlspecialchars($errorMsg); ?>
 			</div>
 		<?php endif; ?>
-	
+
 		<?php if ($successMsg): ?>
 			<div class="success-message">
 				<?php echo htmlspecialchars($successMsg); ?>
@@ -34,15 +34,15 @@ $successMsg = $_GET['success'] ?? '';
 		<form action="<?php echo htmlspecialchars(BASE_URL); ?>check_contact" method="post">
 			<p>
 				<label for="name">Name</label><br>
-				<input type="text" id="name" name="name">
+				<input type="text" id="name" name="name" required>
 			</p>
 			<p>
 				<label for="email">Email</label><br>
-				<input type="email" id="email" name="email">
+				<input type="email" id="email" name="email" required>
 			</p>
 			<p>
 				<label for="message">Message</label><br>
-				<textarea id="message" name="message" rows="5"></textarea>
+				<textarea id="message" name="message" rows="5" required></textarea>
 			</p>
 			<button type="submit">Send Message</button>
 		</form>

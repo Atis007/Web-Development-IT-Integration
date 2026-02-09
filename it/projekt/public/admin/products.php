@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../../config/config.php';
-require PROJECT_ROOT . '/src/functions.php';
+require_once __DIR__ . '/../../config/config.php';
+require_once PROJECT_ROOT . '/src/functions.php';
 
 if (session_status() === PHP_SESSION_NONE) {
 	session_start();
@@ -18,9 +18,9 @@ $title = 'Products Admin';
 $metaDescription = 'Manage products.';
 require PROJECT_ROOT . '/templates/header.php';
 
-$categories = getCategories($pdo);
-$products = getAllProductsWithCategory($pdo);
-$actionUrl = BASE_URL . 'admin/check-product';
+$categories = getCategories($GLOBALS['pdo']);
+$products = getAllProductsWithCategory($GLOBALS['pdo']);
+$actionUrl = BASE_URL . 'admin/check_product';
 ?>
 
 <main class="container admin-page">

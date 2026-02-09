@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-require __DIR__ . '/../../config/config.php';
-require PROJECT_ROOT . '/src/functions.php';
+require_once __DIR__ . '/../../config/config.php';
+require_once PROJECT_ROOT . '/src/functions.php';
 
 if (session_status() === PHP_SESSION_NONE) {
 	session_start();

@@ -21,7 +21,6 @@ $categories = getCategories($GLOBALS['pdo']);
         <?php else: ?>
             <?php foreach ($categories as $category) : ?>
                 <div class="accordion">
-                    <img class="icon" alt="pizza" src="<?php echo htmlspecialchars($category['image_url']); ?>" />
                     <button type="button"><?php echo htmlspecialchars($category['name']); ?></button>
                 </div>
                 <div class="panel">

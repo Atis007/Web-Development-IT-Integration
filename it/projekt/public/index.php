@@ -26,7 +26,7 @@ $router->add('POST', '/login-action', 'src/actions/login_action.php');
 $router->add('POST', '/register-action', 'src/actions/register_action.php');
 $router->add('POST', '/order-action', 'src/actions/order_action.php');
 $router->add('POST', '/save-order', 'src/actions/save_order.php');
-$router->add('POST', '/admin/check-product', 'public/admin/check_product.php');
+$router->add('POST', '/admin/check_product', 'public/admin/check_product.php');
 $router->add('POST', '/check_contact', 'src/actions/check_contact.php');
 
 
